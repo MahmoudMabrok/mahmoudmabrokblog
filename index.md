@@ -8,7 +8,7 @@
 ## Codelab ber araby 
 - Flutter 
   - [Write Your First Flutter App, part 1](codelab/codelab_flutter1.md)
-  - [Write Your First Flutter App, part 2]()
+  - [Write Your First Flutter App, part 2](codelab/codelab_flutter2.md)
 
 ## Apps
 - Kartony 

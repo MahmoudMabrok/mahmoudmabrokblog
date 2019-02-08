@@ -1,52 +1,5 @@
-<div dir = "rtl">
 
-# الجزء الاول 
-هنتعلم ف الى الجزء ده بداية  flutter 
-
-- إزاى نكتب اول تطبيق  بFlutter 
-- ايه هو هيكلة التطبيق 
-- ازاى اضيف package  والاقيها فين 
-- استخدام hot reload 
-- ايه هو  stateful widget 
-- ازاى نعمل listview  مع lazy load
-
-
-### هيكلية التطبيق 
-- ملفات الكود بلغة ال dart  واللى تحتوي على logic  مع ال design   وده حل مشاكل كتير من اختلاف لغة التصميم ولغة التنفيذ 
-
-- فيه package manager  وهو **pub**  وده المختص  عن ربط ال packages 
- والملف اللى فيه الاعدادات ومن خليه نقدر نضيف packages  **pubspec.yaml**
-
-
-### packages 
- دي تجميعة لمحموعة من classes  بتسهل علينا الكود واداء الوظائف المطلوبة منا 
- ده الموقع اللى عليه كل packages  [pub](https://pub.dartlang.org/)
- يمكنك البحث على packages  ومعرفة حالتها 
- من المتابعة والصيانة 
-
- وينصح بالتعامل مع 70 في 100 فما اكثر للحصول على 
- استقرار 
-
-بيتم إضافتها في ملف  pubspec.yaml 
-
-زي  english words 
-</div>
-
-``` yaml 
-dependencies:
-  flutter:
-    sdk: flutter
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^0.1.0
-  english_words: ^3.1.3 # added 
-
-```
-
-
-
-complete code  **main.dart** 
+main.dart 
 ```  dart
 
 import 'package:english_words/english_words.dart';

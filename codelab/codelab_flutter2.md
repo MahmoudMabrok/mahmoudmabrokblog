@@ -1,9 +1,5 @@
-
-main.dart 
-```  dart
-
-import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
+import './second_screen.dart';
 
 void main() => runApp(new MyApp());
 
@@ -13,35 +9,61 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return new MaterialApp(
         home: new Scaffold(
-            appBar: AppBar(
-              title:  Text('Random Generator'),
-
+            appBar: new  AppBar(
+              title:  new Text('Random Generator'),
             ),
             body: Center(
-                  child: new Random(),
-                )
+              child: new Text('Hi'),
+            )
         )
     );
   }
+
 }
+/*
+
 class Random extends StatefulWidget {
   @override
   _RandomState createState() => _RandomState();
 }
 
 class _RandomState extends State<Random> {
-  final List<WordPair> _suggestions = <WordPair>[] ;
+  final List<WordPair> _suggestions = <WordPair>[];
+  final Set<WordPair> _loved = Set<WordPair>();
+  final TextStyle customStyle = TextStyle(
+      fontSize: 30.0,
+      color: Colors.blueGrey
+  );
+
   @override
   Widget build(BuildContext context) {
-    return _generateRandom();
+    return new Scaffold(
+      appBar: new AppBar(
+        title: new Text("Random "),
+        actions: <Widget>[
+          new IconButton(
+              icon: const Icon(Icons.list), onPressed: _pushNewRout(context))
+        ],
+      ),
+      body: Center(
+        child: _generateRandom(),
+      ),
+    );
   }
 
-  Widget _generateRandom (){
+  _pushNewRout(BuildContext context) {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => SecondScreen(_loved)));
+  }
+
+  Widget _generateRandom() {
     return new ListView.builder(
         padding: const EdgeInsets.all(16.0),
         itemBuilder: (BuildContext _context, int i) {
           final int index = i ~/ 2;
-          print (i);
+          if (i.isOdd) {
+            return Divider();
+          }
           if (index >= _suggestions.length) {
             // generateWordPairs() is a method inside WordPair generate list of wordpairs
             _suggestions.addAll(generateWordPairs().take(10));
@@ -52,80 +74,69 @@ class _RandomState extends State<Random> {
   }
 
   Widget _buildRow(WordPair pair) {
+    final isLoved = _loved.contains(pair);
+    return new ListTile(
+      title: new Text(
+        pair.asPascalCase,
+      ),
+      trailing: new Icon(
+        isLoved ? Icons.favorite : Icons.favorite_border,
+        color: isLoved ? Colors.red : null,
+      )
+      ,
+      onTap: () {
+        // used to update UI by calling build method
+        setState(() {
+          // check if it loved then remove it otherwise add it to loved Set
+          if (isLoved) {
+            _loved.remove(pair);
+          } else {
+            _loved.add(pair);
+          }
+        });
+      },
+    );
+  }
+
+}
+*/
+
+
+
+
+## second 
+
+``` dart 
+
+import 'package:english_words/english_words.dart';
+import 'package:flutter/material.dart';
+
+class SecondScreen extends StatelessWidget {
+  final Set<WordPair> _selectedWords;
+
+  SecondScreen(this._selectedWords);
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(child: new Scaffold(body: Center(child: setData())));
+  }
+
+  setData() {
+    return new ListView.builder(
+        padding: const EdgeInsets.all(16.0),
+        itemBuilder: (BuildContext _context, int i) {
+          return _buildRow(_selectedWords.elementAt(i));
+        });
+  }
+
+  Widget _buildRow(WordPair pair) {
     return new ListTile(
       title: new Text(
         pair.asPascalCase,
       ),
     );
   }
-
 }
 
-```
 
-pubspec.yaml 
-``` yaml
-name: first_workshop_app
-description: A new Flutter application.
-
-dependencies:
-  flutter:
-    sdk: flutter
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^0.1.0
-  english_words: ^3.1.3 # added 
-
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
-
-
-# For information on the generic Dart part of this file, see the
-# following page: https://www.dartlang.org/tools/pub/pubspec
-
-# The following section is specific to Flutter.
-flutter:
-
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
-  uses-material-design: true
-
-  # To add assets to your application, add an assets section, like this:
-  # assets:
-  #  - images/a_dot_burr.jpeg
-  #  - images/a_dot_ham.jpeg
-
-  # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.io/assets-and-images/#resolution-aware.
-
-  # For details regarding adding assets from package dependencies, see
-  # https://flutter.io/assets-and-images/#from-packages
-
-  # To add custom fonts to your application, add a fonts section here,
-  # in this "flutter" section. Each entry in this list should have a
-  # "family" key with the font family name, and a "fonts" key with a
-  # list giving the asset and other descriptors for the font. For
-  # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
-  #
-  # For details regarding fonts from package dependencies, 
-  # see https://flutter.io/custom-fonts/#from-packages
-
-```
-
-
-
-
+``` 

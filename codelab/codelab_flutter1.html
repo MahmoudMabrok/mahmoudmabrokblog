@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>codelab_flutter1.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+	font-size: 14px;
+	padding: 0 12px;
+	line-height: 22px;
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	color: #4080D0;
+	text-decoration: none;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+h1 code,
+h2 code,
+h3 code,
+h4 code,
+h5 code,
+h6 code {
+	font-size: inherit;
+	line-height: auto;
+}
+
+a:hover {
+	color: #4080D0;
+	text-decoration: underline;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left: 5px solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 14px;
+	line-height: 19px;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+.mac code {
+	font-size: 12px;
+	line-height: 18px;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+/** Theming */
+
+.vscode-light,
+.vscode-light pre code {
+	color: rgb(30, 30, 30);
+}
+
+.vscode-dark,
+.vscode-dark pre code {
+	color: #DDD;
+}
+
+.vscode-high-contrast,
+.vscode-high-contrast pre code {
+	color: white;
+}
+
+.vscode-light code {
+	color: #A31515;
+}
+
+.vscode-dark code {
+	color: #D7BA7D;
+}
+
+.vscode-light pre:not(.hljs),
+.vscode-light code > div {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre:not(.hljs),
+.vscode-dark code > div {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre:not(.hljs),
+.vscode-high-contrast code > div {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+.vscode-light blockquote,
+.vscode-dark blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.vscode-high-contrast blockquote {
+	background: transparent;
+	border-color: #fff;
+}
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family:  "Meiryo", "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+</head>
+<body>
+<div dir = "rtl">
+<h1 id="%D8%A7%D9%84%D8%AC%D8%B2%D8%A1-%D8%A7%D9%84%D8%A7%D9%88%D9%84">الجزء الاول</h1>
+<p>هنتعلم ف الى الجزء ده بداية  flutter</p>
+<ul>
+<li>إزاى نكتب اول تطبيق  بFlutter</li>
+<li>ايه هو هيكلة التطبيق</li>
+<li>ازاى اضيف package  والاقيها فين</li>
+<li>استخدام hot reload</li>
+<li>ايه هو  stateful widget</li>
+<li>ازاى نعمل listview  مع lazy load</li>
+</ul>
+<h3 id="%D9%87%D9%8A%D9%83%D9%84%D9%8A%D8%A9-%D8%A7%D9%84%D8%AA%D8%B7%D8%A8%D9%8A%D9%82">هيكلية التطبيق</h3>
+<ul>
+<li>
+<p>ملفات الكود بلغة ال dart  واللى تحتوي على logic  مع ال design   وده حل مشاكل كتير من اختلاف لغة التصميم ولغة التنفيذ</p>
+</li>
+<li>
+<p>فيه package manager  وهو <strong>pub</strong>  وده المختص  عن ربط ال packages
+والملف اللى فيه الاعدادات ومن خليه نقدر نضيف packages  <strong>pubspec.yaml</strong></p>
+</li>
+</ul>
+<h3 id="packages">packages</h3>
+<p>دي تجميعة لمحموعة من classes  بتسهل علينا الكود واداء الوظائف المطلوبة منا
+ده الموقع اللى عليه كل packages  <a href="https://pub.dartlang.org/">pub</a>
+يمكنك البحث على packages  ومعرفة حالتها
+من المتابعة والصيانة</p>
+<p>وينصح بالتعامل مع 70 في 100 فما اكثر للحصول على
+استقرار</p>
+<p>بيتم إضافتها في ملف  pubspec.yaml</p>
+<p>زي  english words</p>
+</div>
+<pre class="hljs"><code><div><span class="hljs-attr">dependencies:</span>
+<span class="hljs-attr">  flutter:</span>
+<span class="hljs-attr">    sdk:</span> <span class="hljs-string">flutter</span>
+
+  <span class="hljs-comment"># The following adds the Cupertino Icons font to your application.</span>
+  <span class="hljs-comment"># Use with the CupertinoIcons class for iOS style icons.</span>
+<span class="hljs-attr">  cupertino_icons:</span> <span class="hljs-string">^0.1.0</span>
+<span class="hljs-attr">  english_words:</span> <span class="hljs-string">^3.1.3</span> <span class="hljs-comment"># added </span>
+
+</div></code></pre>
+<p>complete code  <strong>main.dart</strong></p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> <span class="hljs-string">'package:english_words/english_words.dart'</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">'package:flutter/material.dart'</span>;
+
+<span class="hljs-keyword">void</span> main() =&gt; runApp(<span class="hljs-keyword">new</span> MyApp());
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyApp</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">StatelessWidget</span> </span>{
+  <span class="hljs-comment">// This widget is the root of your application.</span>
+  <span class="hljs-meta">@override</span>
+  Widget build(BuildContext context) {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> MaterialApp(
+        home: <span class="hljs-keyword">new</span> Scaffold(
+            appBar: AppBar(
+              title:  Text(<span class="hljs-string">'Random Generator'</span>),
+
+            ),
+            body: Center(
+                  child: <span class="hljs-keyword">new</span> Random(),
+                )
+        )
+    );
+  }
+}
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Random</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">StatefulWidget</span> </span>{
+  <span class="hljs-meta">@override</span>
+  _RandomState createState() =&gt; _RandomState();
+}
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">_RandomState</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">State</span>&lt;<span class="hljs-title">Random</span>&gt; </span>{
+  <span class="hljs-keyword">final</span> <span class="hljs-built_in">List</span>&lt;WordPair&gt; _suggestions = &lt;WordPair&gt;[] ;
+  <span class="hljs-meta">@override</span>
+  Widget build(BuildContext context) {
+    <span class="hljs-keyword">return</span> _generateRandom();
+  }
+
+  Widget _generateRandom (){
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ListView.builder(
+        padding: <span class="hljs-keyword">const</span> EdgeInsets.all(<span class="hljs-number">16.0</span>),
+        itemBuilder: (BuildContext _context, <span class="hljs-built_in">int</span> i) {
+          <span class="hljs-keyword">final</span> <span class="hljs-built_in">int</span> index = i ~/ <span class="hljs-number">2</span>;
+          <span class="hljs-built_in">print</span> (i);
+          <span class="hljs-keyword">if</span> (index &gt;= _suggestions.length) {
+            <span class="hljs-comment">// generateWordPairs() is a method inside WordPair generate list of wordpairs</span>
+            _suggestions.addAll(generateWordPairs().take(<span class="hljs-number">10</span>));
+          }
+          <span class="hljs-keyword">return</span> _buildRow(_suggestions[index]);
+        }
+    );
+  }
+
+  Widget _buildRow(WordPair pair) {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ListTile(
+      title: <span class="hljs-keyword">new</span> Text(
+        pair.asPascalCase,
+      ),
+    );
+  }
+
+}
+
+</div></code></pre>
+<p>pubspec.yaml</p>
+<pre class="hljs"><code><div><span class="hljs-attr">name:</span> <span class="hljs-string">first_workshop_app</span>
+<span class="hljs-attr">description:</span> <span class="hljs-string">A</span> <span class="hljs-string">new</span> <span class="hljs-string">Flutter</span> <span class="hljs-string">application.</span>
+
+<span class="hljs-attr">dependencies:</span>
+<span class="hljs-attr">  flutter:</span>
+<span class="hljs-attr">    sdk:</span> <span class="hljs-string">flutter</span>
+
+  <span class="hljs-comment"># The following adds the Cupertino Icons font to your application.</span>
+  <span class="hljs-comment"># Use with the CupertinoIcons class for iOS style icons.</span>
+<span class="hljs-attr">  cupertino_icons:</span> <span class="hljs-string">^0.1.0</span>
+<span class="hljs-attr">  english_words:</span> <span class="hljs-string">^3.1.3</span> <span class="hljs-comment"># added </span>
+
+<span class="hljs-attr">dev_dependencies:</span>
+<span class="hljs-attr">  flutter_test:</span>
+<span class="hljs-attr">    sdk:</span> <span class="hljs-string">flutter</span>
+
+
+<span class="hljs-comment"># For information on the generic Dart part of this file, see the</span>
+<span class="hljs-comment"># following page: https://www.dartlang.org/tools/pub/pubspec</span>
+
+<span class="hljs-comment"># The following section is specific to Flutter.</span>
+<span class="hljs-attr">flutter:</span>
+
+  <span class="hljs-comment"># The following line ensures that the Material Icons font is</span>
+  <span class="hljs-comment"># included with your application, so that you can use the icons in</span>
+  <span class="hljs-comment"># the material Icons class.</span>
+<span class="hljs-attr">  uses-material-design:</span> <span class="hljs-literal">true</span>
+
+  <span class="hljs-comment"># To add assets to your application, add an assets section, like this:</span>
+  <span class="hljs-comment"># assets:</span>
+  <span class="hljs-comment">#  - images/a_dot_burr.jpeg</span>
+  <span class="hljs-comment">#  - images/a_dot_ham.jpeg</span>
+
+  <span class="hljs-comment"># An image asset can refer to one or more resolution-specific "variants", see</span>
+  <span class="hljs-comment"># https://flutter.io/assets-and-images/#resolution-aware.</span>
+
+  <span class="hljs-comment"># For details regarding adding assets from package dependencies, see</span>
+  <span class="hljs-comment"># https://flutter.io/assets-and-images/#from-packages</span>
+
+  <span class="hljs-comment"># To add custom fonts to your application, add a fonts section here,</span>
+  <span class="hljs-comment"># in this "flutter" section. Each entry in this list should have a</span>
+  <span class="hljs-comment"># "family" key with the font family name, and a "fonts" key with a</span>
+  <span class="hljs-comment"># list giving the asset and other descriptors for the font. For</span>
+  <span class="hljs-comment"># example:</span>
+  <span class="hljs-comment"># fonts:</span>
+  <span class="hljs-comment">#   - family: Schyler</span>
+  <span class="hljs-comment">#     fonts:</span>
+  <span class="hljs-comment">#       - asset: fonts/Schyler-Regular.ttf</span>
+  <span class="hljs-comment">#       - asset: fonts/Schyler-Italic.ttf</span>
+  <span class="hljs-comment">#         style: italic</span>
+  <span class="hljs-comment">#   - family: Trajan Pro</span>
+  <span class="hljs-comment">#     fonts:</span>
+  <span class="hljs-comment">#       - asset: fonts/TrajanPro.ttf</span>
+  <span class="hljs-comment">#       - asset: fonts/TrajanPro_Bold.ttf</span>
+  <span class="hljs-comment">#         weight: 700</span>
+  <span class="hljs-comment">#</span>
+  <span class="hljs-comment"># For details regarding fonts from package dependencies, </span>
+  <span class="hljs-comment"># see https://flutter.io/custom-fonts/#from-packages</span>
+
+</div></code></pre>
+
+</body>
+</html>

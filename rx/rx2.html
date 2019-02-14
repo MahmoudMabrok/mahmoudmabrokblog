@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>index.md</title>
+<title>rx2.md</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 
 <style>
@@ -385,52 +385,86 @@ blockquote {
 
 </head>
 <body>
-<h2 id="%D9%85%D8%B1%D8%AD%D8%A8%D8%A7-%D8%A8%D9%83%D9%85-%D9%81%D9%89-%D8%A7%D9%84%D9%85%D8%AF%D9%88%D9%86%D8%A9-%D8%A7%D9%84%D8%B4%D8%AE%D8%B5%D9%8A%D8%A9">مرحبا بكم فى المدونة الشخصية</h2>
-<p>ولأن زكاة العلم نشره سيتم مشاركة كل المعلومات والشروحات المختلفة على هذة المدونة</p>
-<h2 id="articles">Articles</h2>
+<div dir="rtl">
+<h1 id="%D8%A7%D9%84%D8%AC%D8%B2%D8%A1-%D8%A7%D9%84%D8%AA%D8%A7%D9%86%D9%8A">الجزء التاني</h1>
+<p>اتكلمنا عن مقدمة لل Rx  وخدنا مثال HelloWorld<br>
+لتقليل الكود المكتوب لانشاء كل من ال Observable
+فممكن نستخدم مع Observable</p>
+<pre class="hljs"><code><div>Observable&lt;String&gt; myObservable =
+   Observable.just(<span class="hljs-string">"Hello, world!"</span>);
+</div></code></pre>
+<p><code>Observable.just(&quot;Hello, world!&quot;);</code>  just --&gt; operator<br>
+بياخد مجموعة من العناصر ويرجع <strong>ObseravableSource</strong>
+بيرسل كل عنصر من العناصر وبعدين يبعت <strong>Compelete</strong></p>
+<p><strong>subscribe</strong> accepts a subscriber that has implementation to onNext , onError ,onComplete  as next::</p>
+<div>
+<pre class="hljs"><code><div>myObservable.subscribe(onNextAction, onErrorAction, onCompleteAction);
+</div></code></pre>
+<p><em>so we can specify all of them or just onNext, as below</em></p>
+<pre class="hljs"><code><div>Observable.just(<span class="hljs-string">"Hello, world!"</span>)
+   .subscribe(<span class="hljs-keyword">new</span> Action1&lt;String&gt;() {
+       <span class="hljs-meta">@Override</span>
+       <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">call</span><span class="hljs-params">(String s)</span> </span>{
+     	    System.out.println(s);
+   	}
+   });
+</div></code></pre>
+<p><strong>Action1</strong> here reprsent what is shoud be done when new item is emitted  (بيمثل onNext)</p>
+<p>output:: <code>Hello, world!</code></p>
+<p>ونقدر نختصر الكود الى اقل حاجة واكثرها وظيفية</p>
+<pre class="hljs"><code><div>Observable.just(<span class="hljs-string">"Hello, world!"</span>).subscribe(s -&gt; System.out.println(s));
+</div></code></pre>
+<div dir="rtl">
+# التعديل والتشكيل 
+ هنا احنا بيحصل إصدار للداتا ونقلها الى المشركين و يمكننا اضافة بعض التعديلات ع الداتا ويكون معانا امكانية لتبسيط معالجة الداتا عند المشتركين 
+مثلا 
+<div>
+<pre class="hljs"><code><div>Observable.just(<span class="hljs-string">"Hello, world!"</span>)
+    .subscribe(s -&gt; System.out.println(s + <span class="hljs-string">" -User"</span>));
+</div></code></pre>
+<div dir="rtl">
+<p>هنا احنا ضفنا مع كل داتا جديدة كلمة User<br>
+لكن ده بيتم عند المشترك واللى فى الغالب بيكون في **main thread ** طب لو التعديل هيكون كبير وهياخد وقت وعايزه يصل للمشترك جاهز للاستخدام
+فهني تظهر أهمية ال <strong>operator</strong></p>
+<h1 id="operator-%D8%A7%D9%84%D9%85%D8%B9%D8%A7%D9%85%D9%84%D8%A7%D8%AA">Operator  المعاملات</h1>
+<p>ودي تقدر تقول عليها أدوات سحرية للتحويل والتعامل مع الداتا لتبسيطها وجعلها جاهزة للاستخدام النهائي</p>
+<p>نتعرض لمجموعة منها وهم <em><strong>map</strong></em> , <strong><strong>flatMap</strong></strong> , <em><strong>take</strong></em>  , <em><strong>filter</strong></em> , <em><strong>doOnNext</strong></em></p>
+<h2 id="map-%D8%AD%D9%88%D9%84-%D9%88%D8%B4%D9%83%D9%84">map  حول وشكل</h2>
+<p>ده بيستقبل الداتا وبعدل عليها ويرجعها بشكل تاني</p>
+<div>
+<pre class="hljs"><code><div>Observable.just(<span class="hljs-string">"Hello, world!"</span>)
+    .map(<span class="hljs-keyword">new</span> Func1&lt;String, String&gt;() { <span class="hljs-comment">// Func1 accept string return string</span>
+        <span class="hljs-meta">@Override</span>
+        <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">call</span><span class="hljs-params">(String s)</span> </span>{
+            <span class="hljs-keyword">return</span> s + <span class="hljs-string">" -User"</span>;
+        }
+    })
+    .subscribe(s -&gt; System.out.println(s));
+</div></code></pre>
+<p>ويمكن تبسيطها عن طريق</p>
+<pre class="hljs"><code><div>Observable.just(<span class="hljs-string">"Hello, world!"</span>)
+    .map(s -&gt; s + <span class="hljs-string">" -User"</span>)
+    .subscribe(s -&gt; System.out.println(s));
+</div></code></pre>
+<div>
+<p>ويمكن أيضا تحويل ال string  الى اي نوع تانى حسب الحاجة
+وكذلك يمكنك دمج أكثر من map  مع بعض</p>
+<div>
+<pre class="hljs"><code><div>Observable.just(<span class="hljs-string">"Hello, world!"</span>)
+    .map(s -&gt; s + <span class="hljs-string">" -User"</span>) <span class="hljs-comment">// هنا ضاف على النص الناتج كلمة </span>
+    .map(s -&gt; s.hashCode()) <span class="hljs-comment">// هنا هيحول الناتج الى رقم </span>
+    .map(i -&gt; Integer.toString(i)) <span class="hljs-comment">// هنا يرجع تانى الرقم الى نص </span>
+    .subscribe(s -&gt; System.out.println(s)); <span class="hljs-comment">// يعرضه ع الشاشة </span>
+</div></code></pre>
+<div>
+<p>من المثال السابق نلاحظ</p>
 <ul>
-<li>RxJava &amp; RxAndroid
-<ul>
-<li><a href="rx/rx1.html">lesson 1</a></li>
-<li><a href="rx/rx2.html">lesson 2</a></li>
+<li>map  مش لازم نوع  الداتا يكون نفس النوع اللى هي هتحول الداتا ليه</li>
+<li>ممكن نضيف اكتر من map</li>
+<li>مفيش اي ارتباط بين Observable , subscriber  اللى بيحصل ف النص غير مرئ ليهم كل واحد شغال حسب اللى اللى جايله وبأدي وظيفته وبس</li>
 </ul>
-</li>
-</ul>
-<h2 id="codelab-ber-araby">Codelab ber araby</h2>
-<ul>
-<li>Flutter
-<ul>
-<li><a href="codelab/codelab_flutter1.html">Write Your First Flutter App, part 1</a></li>
-<li><a href="codelab/codelab_flutter2.html">Write Your First Flutter App, part 2</a></li>
-</ul>
-</li>
-</ul>
-<h2 id="dart">Dart</h2>
-<ul>
-<li><a href="dart/dart1.html">Variable</a></li>
-</ul>
-<h2 id="apps">Apps</h2>
-<ul>
-<li>Kartony</li>
-<li>TicTacToi</li>
-<li>FeeUploader</li>
-</ul>
-<h2 id="tips">Tips</h2>
-<ul>
-<li>prepared adapter for recyclerview</li>
-</ul>
-<h2 id="libraries">Libraries</h2>
-<ul>
-<li>UI
-<ul>
-<li>sdp &amp;&amp; ssp</li>
-</ul>
-</li>
-<li>Image Loading</li>
-<li>Networking</li>
-<li>Chart</li>
-<li>Miscs</li>
-</ul>
-
+<p>ويا رب تكون الرؤية اتضحت شويه
+ونكمل إن شاءالله  ف المقالات القادمة</p>
+<div>
 </body>
 </html>

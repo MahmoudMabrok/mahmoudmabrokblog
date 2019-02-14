@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>index.md</title>
+<title>rx1.md</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 
 <style>
@@ -385,52 +385,73 @@ blockquote {
 
 </head>
 <body>
-<h2 id="%D9%85%D8%B1%D8%AD%D8%A8%D8%A7-%D8%A8%D9%83%D9%85-%D9%81%D9%89-%D8%A7%D9%84%D9%85%D8%AF%D9%88%D9%86%D8%A9-%D8%A7%D9%84%D8%B4%D8%AE%D8%B5%D9%8A%D8%A9">مرحبا بكم فى المدونة الشخصية</h2>
-<p>ولأن زكاة العلم نشره سيتم مشاركة كل المعلومات والشروحات المختلفة على هذة المدونة</p>
-<h2 id="articles">Articles</h2>
+<div dir= "rtl">
+## تعلم  RxJavaوRxAndroid
+ إن تعلمها من أهم موضوعات التى يجب الالمام بها لاضافة تفاعلية للتطبيق الخاص بك 
+ وهى امتداد لل reactive programming  ولكن معمول تعديل ليها لتعمل على الجافا ومنها ايضا RxAndroid  للعمل على الاندرويد 
+<h2 id="%D8%A7%D9%84%D9%81%D9%83%D8%B1%D8%A9">الفكرة</h2>
+<p>هي قائمةعلى ديزاين باترن الا هو <strong>Observer design pattern</strong>
+واللى قائم على <em>Observable</em> , <em>Subscriber</em><br>
+زي جريدة معينة والمشتركين فيها
+الجريدة بتنشر نسخ ليها وطبعات ويتم إعلام المشتركين فيها فور اطلاق عدد جديد
+فهنا الجريدة هى الناشر اي <em>observable</em>  وهنا المستخدمين او المشتركين هما <em>Subscriber</em>
+وفي التصميم ده هنا المشترك مش محتاج كل شويه يسأل هل فيه داتا او عدد جديد نزل لانه بمجر ما يصدر عدد بيتم اعلامه فورا</p>
+<p>لكن يختلف انه هنا مش هيتم اصدار التحديثات إلا اذا كان هناك مشتركين</p>
+<p>وأيضا بيتم تحول الاحداث إلى تتابع من الداتا
+convert actions into series of data
+زي مثلا الضغطات على زرار معين او <strong>api calls</strong>
+بيتم دمجهم مع بعض وغيرها من العمليات</p>
+<h2 id="hello-world">Hello World</h2>
+<p>نبدأ بمثال بسيط نوضح اللى بيحصل
+التعامل بين Observable , Subscriber  بيكون من خلال ثلاث دوال</p>
 <ul>
-<li>RxJava &amp; RxAndroid
-<ul>
-<li><a href="rx/rx1.html">lesson 1</a></li>
-<li><a href="rx/rx2.html">lesson 2</a></li>
+<li><em>onNext</em>  ودي بتنقل الداتا الجديد للمشركين</li>
+<li><em>onComplete</em>  ودي اشعار انا الداتا كلها تم ارسالها</li>
+<li><em>onError</em>  وهنا بيتم معالجة اى اخطاء حصلت خلال عملية الارسال</li>
 </ul>
-</li>
-</ul>
-<h2 id="codelab-ber-araby">Codelab ber araby</h2>
-<ul>
-<li>Flutter
-<ul>
-<li><a href="codelab/codelab_flutter1.html">Write Your First Flutter App, part 1</a></li>
-<li><a href="codelab/codelab_flutter2.html">Write Your First Flutter App, part 2</a></li>
-</ul>
-</li>
-</ul>
-<h2 id="dart">Dart</h2>
-<ul>
-<li><a href="dart/dart1.html">Variable</a></li>
-</ul>
-<h2 id="apps">Apps</h2>
-<ul>
-<li>Kartony</li>
-<li>TicTacToi</li>
-<li>FeeUploader</li>
-</ul>
-<h2 id="tips">Tips</h2>
-<ul>
-<li>prepared adapter for recyclerview</li>
-</ul>
-<h2 id="libraries">Libraries</h2>
-<ul>
-<li>UI
-<ul>
-<li>sdp &amp;&amp; ssp</li>
-</ul>
-</li>
-<li>Image Loading</li>
-<li>Networking</li>
-<li>Chart</li>
-<li>Miscs</li>
-</ul>
+<p>نبدأ ب Observable</p>
+</div>
+<pre class="hljs"><code><div>  Observable&lt;String&gt; myObservable = Observable.create(
+    <span class="hljs-keyword">new</span> Observable.OnSubscribe&lt;String&gt;() {
+        <span class="hljs-meta">@Override</span>
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">call</span><span class="hljs-params">(Subscriber&lt;? <span class="hljs-keyword">super</span> String&gt; sub)</span> </span>{
+            sub.onNext(<span class="hljs-string">"Hello, world!"</span>);
+            sub.onCompleted();
+        }
+    }
+);
+</div></code></pre>
+<p><code>Observable&lt;String&gt;</code> <em>String</em>  تعبر عن نوع الداتا اللى هيتم ارسالها</p>
+<p><code>call</code> داله داخل OnSubscribe هيتم استدعاءها عند عمل اشتراك او ربط بين ال Observable , Subscriber</p>
+<p><code>sub</code> بيمثل المشترك</p>
+<p><code>sub.onNext(&quot;Hello, world!&quot;);</code>
+هنا هيتعمل استدعاء ارسال الداتا للمشترك عن طريق داله <code>onNext</code>
+<code>sub.onCompleted();</code>  اعلامه أنه تم اكتمال ارسال الداتا الجديدة</p>
+<p>كده خلصنا المصدر اتبقي المشتركين</p>
+<pre class="hljs"><code><div>Subscriber&lt;String&gt; mySubscriber = <span class="hljs-keyword">new</span> Subscriber&lt;String&gt;() {
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onNext</span><span class="hljs-params">(String s)</span> </span>{ System.out.println(s); }
 
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onCompleted</span><span class="hljs-params">()</span> </span>{ }
+
+    <span class="hljs-meta">@Override</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onError</span><span class="hljs-params">(Throwable e)</span> </span>{ }
+};
+</div></code></pre>
+<div dir="rtl">
+<p>Subscriber  بيكون عنده دوال اللى هيا مشتركة للتواصل ما بينهم
+وعامل برمجة ليها للاستجابة للداتا المرسلة من قبل Observable
+فمثلا
+<code>public void onNext(String s) { System.out.println(s); }</code>
+هو هنا حدد انه لما تيجي داتا جديدة قم بعرضها ع الشاشة</p>
+<p>كده خلصنا لا ! اتبقي ايه ؟
+اتبقي اهم حاجة وهي ربطهم ببعض وده عن طريق
+<code>myObservable.subscribe(mySubscriber);</code></p>
+<p>هيتم عرض رسالة الترحيب اللى أرسلها
+Observable  الى  Subscriber</p>
+<p>وكده عرفنا بداية ومقدمة بسيطة عن Rx<br>
+ولنا تكملة إن شاء الله</p>
+<div>
 </body>
 </html>

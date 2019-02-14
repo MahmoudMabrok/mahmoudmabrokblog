@@ -1,4 +1,5 @@
-<div dir = "rtl">
+<div dir= "rtl">
+
 ## تعلم  RxJavaوRxAndroid
  إن تعلمها من أهم موضوعات التى يجب الالمام بها لاضافة تفاعلية للتطبيق الخاص بك 
  وهى امتداد لل reactive programming  ولكن معمول تعديل ليها لتعمل على الجافا ومنها ايضا RxAndroid  للعمل على الاندرويد 
@@ -13,7 +14,6 @@
 
 لكن يختلف انه هنا مش هيتم اصدار التحديثات إلا اذا كان هناك مشتركين 
 
-
  وأيضا بيتم تحول الاحداث إلى تتابع من الداتا
  convert actions into series of data 
  زي مثلا الضغطات على زرار معين او **api calls**
@@ -27,7 +27,12 @@
  - *onComplete*  ودي اشعار انا الداتا كلها تم ارسالها 
  - *onError*  وهنا بيتم معالجة اى اخطاء حصلت خلال عملية الارسال 
 
-  نبدأ ب Observable 
+  نبدأ ب Observable
+
+
+</div>
+
+
 ``` java
   Observable<String> myObservable = Observable.create(
     new Observable.OnSubscribe<String>() {
@@ -38,8 +43,8 @@
         }
     }
 );
+```
 
-``` 
 ``Observable<String>`` *String*  تعبر عن نوع الداتا اللى هيتم ارسالها 
 
 ``call`` داله داخل OnSubscribe هيتم استدعاءها عند عمل اشتراك او ربط بين ال Observable , Subscriber 
@@ -64,6 +69,8 @@ Subscriber<String> mySubscriber = new Subscriber<String>() {
     public void onError(Throwable e) { }
 };
 ```
+<div dir="rtl">
+
 Subscriber  بيكون عنده دوال اللى هيا مشتركة للتواصل ما بينهم 
 وعامل برمجة ليها للاستجابة للداتا المرسلة من قبل Observable 
  فمثلا 
@@ -82,4 +89,4 @@ Observable  الى  Subscriber
  وكده عرفنا بداية ومقدمة بسيطة عن Rx  
  ولنا تكملة إن شاء الله
 
-</div>
+<div>

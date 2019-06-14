@@ -19,6 +19,9 @@
 - FeeUploader
 
 ## Tips
+- [Garbag Collector (GC)](notes/GarbagCollector.md).
+- [Weak, Strong, Soft,Phantom Reference()](notes/weak_reference.md).
+- [WeakHashMap](notes/weakHashMap.md).
 - prepared adapter for recyclerview 
 
 

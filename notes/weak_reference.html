@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>index.md</title>
+<title>weak_reference.md</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 
 <style>
@@ -385,54 +385,58 @@ blockquote {
 
 </head>
 <body>
-<h2 id="%D9%85%D8%B1%D8%AD%D8%A8%D8%A7-%D8%A8%D9%83%D9%85-%D9%81%D9%89-%D8%A7%D9%84%D9%85%D8%AF%D9%88%D9%86%D8%A9-%D8%A7%D9%84%D8%B4%D8%AE%D8%B5%D9%8A%D8%A9">مرحبا بكم فى المدونة الشخصية</h2>
-<p>ولأن زكاة العلم نشره سيتم مشاركة كل المعلومات والشروحات المختلفة على هذة المدونة</p>
-<h2 id="articles">Articles</h2>
+<h2 id="definition">Definition</h2>
+<p>In computer programming, a <strong>weak reference</strong> is a reference that <strong>does not protect</strong> the <strong>referenced object</strong> from <strong>collection</strong> by a <strong>garbage collector</strong>, unlike a strong reference.</p>
+<h2 id="uses">Uses</h2>
 <ul>
-<li>RxJava &amp; RxAndroidt(To be continue later)
-<ul>
-<li><a href="rx/rx1.html">lesson 1</a></li>
-<li><a href="rx/rx2.html">lesson 2</a></li>
-</ul>
+<li>
+<p>in the <strong>observer pattern</strong> (particularly in event handling), if a strong reference is kept, objects <strong>must be explicitly unregistered,</strong> otherwise a memory leak occurs (the lapsed listener problem), while a <strong>weak reference</strong> <strong>removes the need to unregister</strong>.</p>
+</li>
+<li>
+<p>the most known use of these references is the <strong>WeakHashMap</strong> class. It’s the implementation of the Map interface where every <strong>key</strong> is stored as <strong>a weak reference</strong> to the given key. When the Garbage Collector <strong>removes a key</strong>, the entity associated with this key is <strong>deleted as well</strong>.</p>
 </li>
 </ul>
-<h2 id="codelab-ber-araby-tto-be-continue-later">Codelab ber araby t(To be continue later)</h2>
+<h2 id="examples">Examples</h2>
+<p>since Java 1.2 there are two types:-</p>
 <ul>
-<li>Flutter
+<li>soft rerefernce</li>
+<li>weak reference</li>
+</ul>
+<p>for example</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> java.lang.ref.WeakReference;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ReferenceTest</span> </span>{
+	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InterruptedException </span>{
+
+            WeakReference wr = <span class="hljs-keyword">new</span> WeakReference(<span class="hljs-string">"I'm here"</span>);
+            StrongReference sr = <span class="hljs-keyword">new</span> StrongReference(<span class="hljs-string">"I'm here"</span>);
+            System.out.println(<span class="hljs-string">"before gc: r="</span> + wr.get() + <span class="hljs-string">", static="</span> + sr.get());
+            System.gc();
+            Thread.sleep(<span class="hljs-number">100</span>);
+
+            <span class="hljs-comment">// only r.get() becomes null</span>
+            System.out.println(<span class="hljs-string">"after gc: r="</span> + wr.get() + <span class="hljs-string">", static="</span> + sr.get());
+
+	}
+}
+</div></code></pre>
+<h2 id="extra">eXTRA</h2>
 <ul>
-<li><a href="codelab/codelab_flutter1.html">Write Your First Flutter App, part 1</a></li>
-<li><a href="codelab/codelab_flutter2.html">Write Your First Flutter App, part 2</a></li>
+<li>
+<p>These special behaviour of SoftReference and WeakReference makes them useful in certain cases e.g. SoftReference looks perfect for implementing caches, so when JVM needs memory it removes object which have only SoftReference pointing towards them.</p>
+</li>
+<li>
+<p>On the other hand WeakReference is great for storing meta data e.g. storing ClassLoader reference. If no class is loaded then no point in keeping reference of ClassLoader, a WeakReference makes ClassLoader eligible for Garbage collection as soon as last strong reference removed.</p>
+</li>
+<li>
+<p>Some cases</p>
+<ul>
+<li><strong>Strong</strong> referece prevent object from GC.</li>
+<li><strong>Weak</strong> referece does not prevent object from GC.</li>
+<li><strong>Soft</strong> referece does not prevent object from GC but delay it until need a memory.</li>
+<li><strong>Phantom</strong> referece does not prevent object from GC (GC collects it whenever it like).</li>
 </ul>
 </li>
-</ul>
-<h2 id="dartto-be-continue-later">Dart(To be continue later)</h2>
-<ul>
-<li><a href="dart/dart1.html">Variable</a></li>
-</ul>
-<h2 id="apps">Apps</h2>
-<ul>
-<li>Kartony</li>
-<li>TicTacToi</li>
-<li>FeeUploader</li>
-</ul>
-<h2 id="tips">Tips</h2>
-<ul>
-<li><a href="notes/GarbagCollector.html">Garbag Collector (GC)</a>.</li>
-<li><a href="notes/weak_reference.html">Weak, Strong, Soft,Phantom Reference()</a>.</li>
-<li><a href="notes/weakHashMap.html">WeakHashMap</a>.</li>
-<li>prepared adapter for recyclerview</li>
-</ul>
-<h2 id="libraries">Libraries</h2>
-<ul>
-<li>UI
-<ul>
-<li>sdp &amp;&amp; ssp</li>
-</ul>
-</li>
-<li>Image Loading</li>
-<li>Networking</li>
-<li>Chart</li>
-<li>Miscs</li>
 </ul>
 
 </body>

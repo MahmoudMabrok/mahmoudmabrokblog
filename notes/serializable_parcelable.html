@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>index.md</title>
+<title>Serializable VS Parcelable</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 
 <style>
@@ -385,53 +385,24 @@ blockquote {
 
 </head>
 <body>
-<h2 id="%D9%85%D8%B1%D8%AD%D8%A8%D8%A7-%D8%A8%D9%83%D9%85-%D9%81%D9%89-%D8%A7%D9%84%D9%85%D8%AF%D9%88%D9%86%D8%A9-%D8%A7%D9%84%D8%B4%D8%AE%D8%B5%D9%8A%D8%A9">مرحبا بكم فى المدونة الشخصية</h2>
-<p>ولأن زكاة العلم نشره سيتم مشاركة كل المعلومات والشروحات المختلفة على هذة المدونة</p>
-<h2 id="series">Series</h2>
+<h1 id="serializable">serializable</h1>
 <ul>
-<li>RxJava &amp; RxAndroidt(To be continued later)
-<ul>
-<li><a href="rx/rx1.html">lesson 1</a></li>
-<li><a href="rx/rx2.html">lesson 2</a></li>
+<li>is a <strong>standard Java interface</strong> not part of Android SDK.</li>
+<li>The problem with this approach is that reflection is used and it is a <strong>slow</strong> process(if not properly used).</li>
+<li><strong>Reflection</strong> is the term for inspecting objects, fields and methods at run-time via Object.getClass()</li>
+<li>Serializables are <strong>better</strong> for <strong>persisting data</strong>.</li>
+<li><strong>easy to implemet</strong>(just implement the Serializable interface and Java will simply do its best effort to serialize it efficiently).</li>
+<li>Serializable <strong>tends</strong> to create a lot of <strong>temporary objects</strong> and cause quite a bit of garbage collection.</li>
 </ul>
-</li>
-</ul>
-<h2 id="codelab-bel-araby-to-be-continued-later">Codelab bel araby (To be continued later)</h2>
+<h1 id="parcelable">Parcelable</h1>
 <ul>
-<li>Flutter
-<ul>
-<li><a href="codelab/codelab_flutter1.html">Write Your First Flutter App, part 1</a></li>
-<li><a href="codelab/codelab_flutter2.html">Write Your First Flutter App, part 2</a></li>
-</ul>
-</li>
-</ul>
-<h2 id="dartto-be-continued-later">Dart(To be continued later)</h2>
-<ul>
-<li><a href="dart/dart1.html">Variable</a></li>
-</ul>
-<h2 id="apps">Apps</h2>
-<ul>
-<li><a href="https://github.com/MahmoudMabrok/QuranyApp">HollyQuran</a></li>
-<li><a href="https://github.com/MahmoudMabrok/Quizzy_app">QuizzyApp</a></li>
-</ul>
-<h2 id="articles">Articles</h2>
-<ul>
-<li><a href="notes/serializable_parcelable.html">Serializable VS Parcelable</a></li>
-<li><a href="notes/GarbagCollector.html">Garbag Collector (GC)</a>.</li>
-<li><a href="notes/weak_reference.html">Weak, Strong, Soft,Phantom Reference()</a>.</li>
-<li><a href="notes/weakHashMap.html">WeakHashMap</a>.</li>
-</ul>
-<h2 id="libraries">Libraries</h2>
-<ul>
-<li>UI
-<ul>
-<li>sdp &amp;&amp; ssp</li>
-</ul>
-</li>
-<li>Image Loading</li>
-<li>Networking</li>
-<li>Chart</li>
-<li>Miscs</li>
+<li>is an <strong>interface</strong> and part of Android SDK.</li>
+<li>Parcelable was specifically designed in such a way that there is <strong>no reflection</strong> when using it.</li>
+<li>we are actually <strong>writing custom code</strong>.</li>
+<li>is <strong>faster</strong> than Serializable in case of default implementation.</li>
+<li>Parcelable interface <strong>takes more time</strong> to implement compared to Serializable interface</li>
+<li>Parcelable array can be passed via Intent in android.</li>
+<li>There are plugins that help creating Parcelable.</li>
 </ul>
 
 </body>

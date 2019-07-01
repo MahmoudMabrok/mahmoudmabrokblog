@@ -1,3 +1,18 @@
+# JUnit 
+- **JUnit** provide automated testing and validation.
+- **JUnit** provides tools to unit test all aspects of program.
+## Using it with IDE
+it is integrated with IDEs such as (eclipse, netbeans, intelij idea).
+
+## Use it with command line 
+- add environment varibale to point to `JUNIT_HOME`  as where jar file is located.
+- set path using `set classpath=%JUNIT_HOME%\junit-2.14.jar`
+- move code file to `JUNIT_HOME`
+- compile file using `javac -cp .;junit-2.14.jar calc.java` 
+- run with `java -cp .;junit-2.14.jar;hancert.jar org.junit.runner.JUnitCore calcTest` 
+
+
+# IDEA 
 - we identify **expected values** and put **actual values** and JUnit do rest of work.
 - easy to **run many tests** at **same time.**
 

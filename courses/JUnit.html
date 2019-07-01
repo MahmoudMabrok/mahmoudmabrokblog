@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>JUnit</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+	font-size: 14px;
+	padding: 0 12px;
+	line-height: 22px;
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	color: #4080D0;
+	text-decoration: none;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+h1 code,
+h2 code,
+h3 code,
+h4 code,
+h5 code,
+h6 code {
+	font-size: inherit;
+	line-height: auto;
+}
+
+a:hover {
+	color: #4080D0;
+	text-decoration: underline;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left: 5px solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 14px;
+	line-height: 19px;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+.mac code {
+	font-size: 12px;
+	line-height: 18px;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+/** Theming */
+
+.vscode-light,
+.vscode-light pre code {
+	color: rgb(30, 30, 30);
+}
+
+.vscode-dark,
+.vscode-dark pre code {
+	color: #DDD;
+}
+
+.vscode-high-contrast,
+.vscode-high-contrast pre code {
+	color: white;
+}
+
+.vscode-light code {
+	color: #A31515;
+}
+
+.vscode-dark code {
+	color: #D7BA7D;
+}
+
+.vscode-light pre:not(.hljs),
+.vscode-light code > div {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre:not(.hljs),
+.vscode-dark code > div {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre:not(.hljs),
+.vscode-high-contrast code > div {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+.vscode-light blockquote,
+.vscode-dark blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.vscode-high-contrast blockquote {
+	background: transparent;
+	border-color: #fff;
+}
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family:  "Meiryo", "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+</head>
+<body>
+<h1 id="junit">JUnit</h1>
+<ul>
+<li><strong>JUnit</strong> provide automated testing and validation.</li>
+<li><strong>JUnit</strong> provides tools to unit test all aspects of program.</li>
+</ul>
+<h2 id="using-it-with-ide">Using it with IDE</h2>
+<p>it is integrated with IDEs such as (eclipse, netbeans, intelij idea).</p>
+<h2 id="use-it-with-command-line">Use it with command line</h2>
+<ul>
+<li>add environment varibale to point to <code>JUNIT_HOME</code>  as where jar file is located.</li>
+<li>set path using <code>set classpath=%JUNIT_HOME%\junit-2.14.jar</code></li>
+<li>move code file to <code>JUNIT_HOME</code></li>
+<li>compile file using <code>javac -cp .;junit-2.14.jar calc.java</code></li>
+<li>run with <code>java -cp .;junit-2.14.jar;hancert.jar org.junit.runner.JUnitCore calcTest</code></li>
+</ul>
+<h1 id="idea">IDEA</h1>
+<ul>
+<li>we identify <strong>expected values</strong> and put <strong>actual values</strong> and JUnit do rest of work.</li>
+<li>easy to <strong>run many tests</strong> at <strong>same time.</strong></li>
+</ul>
+<h2 id="example">Example</h2>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> org.junit.Test;
+<span class="hljs-keyword">import</span> <span class="hljs-keyword">static</span> org.junit.Assert.assertEquals;
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestSum</span> </span>{
+    <span class="hljs-comment">// annotte method with @Test</span>
+    <span class="hljs-meta">@Test</span> 
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testSum</span><span class="hljs-params">()</span></span>{
+        <span class="hljs-keyword">int</span> n1 = <span class="hljs-number">10</span> , n2 = <span class="hljs-number">20</span> ;
+        <span class="hljs-comment">// use Assert to set Conditions to test, first value is expected, second is actual</span>
+        assertEquals(<span class="hljs-number">30</span> , n1+n2);
+        <span class="hljs-comment">// there are several methods, assertEquals, assertSame, assertNull.  </span>
+    }
+}
+</div></code></pre>
+<h1 id="aggregate-tests-into-suite">Aggregate Tests into Suite</h1>
+<ul>
+<li>we can aggregate test classes and all together</li>
+<li>exmaple<pre class="hljs"><code><div><span class="hljs-keyword">import</span> org.junit.runner.RunWith;
+<span class="hljs-keyword">import</span> org.junit.runners.Suite;
+
+<span class="hljs-meta">@RunWith</span>(Suite.class) <span class="hljs-comment">// speciffy runners. </span>
+<span class="hljs-meta">@Suite</span>.SuiteClasses({ <span class="hljs-comment">// add test classes.</span>
+        TestMul.class,
+        TestMul.class
+})
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestSuit</span> </span>{
+
+}
+</div></code></pre>
+</li>
+</ul>
+<h1 id="exception-handling-tests">Exception Handling tests</h1>
+<ul>
+<li>we must test that program run <strong>corrrectly when things goes wrong</strong>.</li>
+<li>example<pre class="hljs"><code><div><span class="hljs-keyword">import</span> org.junit.Test;
+
+<span class="hljs-keyword">import</span> java.util.ArrayList;
+
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestException</span> </span>{
+
+<span class="hljs-comment">// make sure that this method raise an exception from type of ArrayIndexOutOfBoundsException</span>
+<span class="hljs-meta">@Test</span>(expected = IndexOutOfBoundsException.class)
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test</span><span class="hljs-params">()</span></span>{
+    <span class="hljs-keyword">new</span> ArrayList&lt;Object&gt;().get(<span class="hljs-number">0</span>);
+}
+}
+
+</div></code></pre>
+</li>
+</ul>
+<h1 id="ignor-tests">Ignor tests</h1>
+<p>we may need to <strong>ignor some tests</strong> possible ways</p>
+<ul>
+<li>delete/<strong>comment</strong> method.</li>
+<li>remove <code>@Test</code> annotation.</li>
+<li>best one is use <code>@Ignore</code> annotation it <strong>skips test</strong> and <strong>JUnit report it</strong> at end of excution tests.</li>
+</ul>
+<h1 id="paramaterized-tests">Paramaterized tests</h1>
+<ul>
+<li>
+<p><strong>JUnit 4</strong> they added another feature that <strong>allows you run paramaterized tests</strong>.</p>
+</li>
+<li>
+<p>This feature allows the developer to <strong>run tests</strong>, including <strong>multiple values at one time</strong>.</p>
+</li>
+<li>
+<h2 id="example">Example</h2>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> org.junit.Test;
+<span class="hljs-keyword">import</span> org.junit.runner.RunWith;
+<span class="hljs-keyword">import</span> org.junit.runners.Parameterized;
+<span class="hljs-keyword">import</span> org.junit.runners.Parameterized.Parameters;
+
+<span class="hljs-keyword">import</span> java.util.Arrays;
+<span class="hljs-keyword">import</span> java.util.Collection;
+
+<span class="hljs-keyword">import</span> <span class="hljs-keyword">static</span> org.hamcrest.CoreMatchers.is;
+<span class="hljs-keyword">import</span> <span class="hljs-keyword">static</span> org.junit.Assert.assertThat;
+
+<span class="hljs-meta">@RunWith</span>(value = Parameterized.class)
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ParamaterizedTest</span> </span>{
+
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> A ;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> B ;
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> Expected ;
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ParamaterizedTest</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b, <span class="hljs-keyword">int</span> expected)</span> </span>{
+        A = a;
+        B = b;
+        Expected = expected;
+    }
+    <span class="hljs-comment">// name attribute is optional, provide an unique name for test</span>
+    <span class="hljs-comment">// multiple parameters, uses Collection&lt;Object[]&gt;</span>
+    <span class="hljs-meta">@Parameters</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Collection&lt;Object[]&gt; data() {
+        <span class="hljs-keyword">return</span> Arrays.asList(<span class="hljs-keyword">new</span> Object[][]{
+                <span class="hljs-comment">// each one represent a data for single test A,B, Expected.</span>
+                {<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>} ,
+                {<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>} ,
+                {<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">7</span>}
+        });
+    }
+    <span class="hljs-meta">@Test</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test</span><span class="hljs-params">()</span></span>{
+        assertThat(A+B , is(Expected));
+    }
+}
+</div></code></pre>
+</li>
+</ul>
+
+</body>
+</html>

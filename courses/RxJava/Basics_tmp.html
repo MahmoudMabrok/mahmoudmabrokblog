@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Basics.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+	font-size: 14px;
+	padding: 0 12px;
+	line-height: 22px;
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	color: #4080D0;
+	text-decoration: none;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+h1 code,
+h2 code,
+h3 code,
+h4 code,
+h5 code,
+h6 code {
+	font-size: inherit;
+	line-height: auto;
+}
+
+a:hover {
+	color: #4080D0;
+	text-decoration: underline;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left: 5px solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 14px;
+	line-height: 19px;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+.mac code {
+	font-size: 12px;
+	line-height: 18px;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+/** Theming */
+
+.vscode-light,
+.vscode-light pre code {
+	color: rgb(30, 30, 30);
+}
+
+.vscode-dark,
+.vscode-dark pre code {
+	color: #DDD;
+}
+
+.vscode-high-contrast,
+.vscode-high-contrast pre code {
+	color: white;
+}
+
+.vscode-light code {
+	color: #A31515;
+}
+
+.vscode-dark code {
+	color: #D7BA7D;
+}
+
+.vscode-light pre:not(.hljs),
+.vscode-light code > div {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre:not(.hljs),
+.vscode-dark code > div {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre:not(.hljs),
+.vscode-high-contrast code > div {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+.vscode-light blockquote,
+.vscode-dark blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.vscode-high-contrast blockquote {
+	background: transparent;
+	border-color: #fff;
+}
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family:  "Meiryo", "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+</head>
+<body>
+<h1 id="rxjava">RxJava</h1>
+<ul>
+<li>can be though as <strong>library</strong> that give us easy way to use <strong>observer pattern.</strong></li>
+<li>there are Java Observale but it is <strong>complex</strong>, <strong>layered</strong>.</li>
+<li>is a Java implementation for <strong>ReactiveX</strong>.</li>
+</ul>
+<h3 id="component">Component</h3>
+<table>
+<thead>
+<tr>
+<th>Observable</th>
+<th>Observer(Subscribers)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>what you watch</td>
+<td>watcher</td>
+</tr>
+<tr>
+<td>list of values/data</td>
+<td>consumer for data</td>
+</tr>
+</tbody>
+</table>
+<h2 id="observable-categories">Observable Categories</h2>
+<ul>
+<li>New event: (UI events).</li>
+<li>Change event: (change title after data update).</li>
+<li>Complete event: tasks of code (network calls).</li>
+</ul>
+<h2 id="subscriber-methods">Subscriber methods</h2>
+<ul>
+<li><code>onSubscribe()</code>-&gt; when subcribe to observable</li>
+<li><code>onNext()</code>-&gt; when a new value is emited/publisged</li>
+<li><code>onError()</code> -&gt; when error ocurr</li>
+<li><code>onComplete()</code> -&gt; when complete task</li>
+</ul>
+<hr>
+<h1 id="observable-types">Observable Types</h1>
+<ul>
+<li>
+<p><strong>Relay</strong></p>
+<ul>
+<li>easiest piece of work.</li>
+<li><strong>hot observable</strong>: only get <strong>most current values</strong> or default</li>
+<li><strong>never error out</strong> or <strong>complete</strong> so it is <strong>save for UI</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Subject</strong></p>
+<ul>
+<li>little more complex.</li>
+<li>can <strong>receive onComplete/onError</strong> so <em>not ideal</em> for UI.</li>
+<li><strong>Die</strong> after onComplete/onError.</li>
+<li><strong>can observe</strong> and also <strong>be observed</strong>.</li>
+<li><strong>hot observable</strong>:but it <strong>receive number of events</strong> depending of its type.</li>
+<li>flavor of subjects:
+<ul>
+<li><strong>Behavior</strong>:- <strong>last event</strong> or defaut (ex as kid remember last thing).</li>
+<li><strong>Publish</strong> :- start from <strong>zero events</strong> so use <strong>only new events</strong>(ex for academia no matter books published by prof only concern what new book to publish).</li>
+<li><strong>Replay</strong>:- hav n of previous events
+<code>let subject = ReplaySubject&lt;String&gt;.create(bufferSize : 3)</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Observable</strong>: used for <strong>complex tasks</strong> such as chaining network calls.</p>
+</li>
+</ul>
+<hr>
+<h2 id="traits">Traits</h2>
+<p>are one-off tasks that cann be wrapped in asingle observable, there are</p>
+<ul>
+<li><strong>Single</strong> that accept (onNext, onError).</li>
+<li><strong>Completable</strong> that accept (onComplete, onError).</li>
+<li><strong>Maybe</strong> that accept (onNext/onComplete, onError).</li>
+</ul>
+<p>when you see <strong>one-off call</strong> such as <strong>network call</strong> so it is a greate place to <strong>use Traits</strong>.</p>
+<hr>
+<h2 id="relay-example">Relay Example.</h2>
+<ul>
+<li>Relay: only default or last value</li>
+<li>it is set and get.</li>
+<li>not accept onError/onComplete.</li>
+</ul>
+<h2 id="code">Code</h2>
+<pre class="hljs"><code><div>
+    <span class="hljs-keyword">val</span> behavoiur = BehaviorRelay.createDefault(<span class="hljs-string">"1"</span>)
+    println(<span class="hljs-string">"~~~ Relay ~~~ "</span>)
+    println(<span class="hljs-string">" 1 value <span class="hljs-subst">${behavoiur.value}</span>"</span>)
+    behavoiur.accept(<span class="hljs-string">"10"</span>)
+    println(<span class="hljs-string">" 2 value <span class="hljs-subst">${behavoiur.value}</span>"</span>)
+    behavoiur.accept(<span class="hljs-string">"12"</span>) <span class="hljs-comment">// is ignored/overwritten</span>
+    behavoiur.accept(<span class="hljs-string">"13"</span>)
+    println(<span class="hljs-string">" 3 value <span class="hljs-subst">${behavoiur.value}</span>"</span>)
+
+</div></code></pre>
+<h2 id="output">Output</h2>
+<pre class="hljs"><code><div>~~~ Relay ~~~
+1 value 1
+2 value 10
+3 value 13
+</div></code></pre>
+<p><code>12</code> is not shown as Relay just use last value only.</p>
+<hr>
+<h1 id="subjects-example">Subjects Example</h1>
+<h2 id="code">Code</h2>
+<pre class="hljs"><code><div>    <span class="hljs-keyword">var</span> behaviorSubject = BehaviorSubject.createDefault(<span class="hljs-string">"10"</span>)
+    <span class="hljs-comment">// disposable hold reference to subscription</span>
+    <span class="hljs-keyword">var</span> disposable = behaviorSubject.subscribe(
+            { newValue -&gt; println(<span class="hljs-string">"behaviorSubject new Value <span class="hljs-variable">$newValue</span>"</span>)},
+            { error-&gt; println(<span class="hljs-string">"behaviorSubject error <span class="hljs-subst">${error.localizedMessage}</span>"</span>)} ,
+            { println(<span class="hljs-string">"behaviorSubject complete"</span>)} ,
+            { dispose -&gt;
+            <span class="hljs-comment">// called with each new subscribtion</span>
+                println(<span class="hljs-string">"behaviorSubject subscribed"</span>)
+            } )
+
+
+    behaviorSubject.onNext(<span class="hljs-string">"1"</span>) <span class="hljs-comment">// publish values </span>
+    behaviorSubject.onNext(<span class="hljs-string">"2"</span>)
+    behaviorSubject.onNext(<span class="hljs-string">"2"</span>)
+
+    behaviorSubject.onComplete() <span class="hljs-comment">// subject dies after onComplete</span>
+    behaviorSubject.onNext(<span class="hljs-string">"3"</span>) <span class="hljs-comment">// not shown</span>
+</div></code></pre>
+<h2 id="output">Output</h2>
+<pre class="hljs"><code><div>I/System.out: behaviorSubject subscribed
+I/System.out: behaviorSubject new Value 10
+I/System.out: behaviorSubject new Value 1
+behaviorSubject new Value 2
+behaviorSubject new Value 2
+I/System.out: behaviorSubject complete
+</div></code></pre>
+<hr>
+<p>#Observable</p>
+<h2 id="code">Code</h2>
+<pre class="hljs"><code><div><span class="hljs-keyword">var</span> observable = Observable.create&lt;String&gt;{
+    observer -&gt; <span class="hljs-comment">// ref for new observer</span>
+    println(<span class="hljs-string">"triggered with every subscriber."</span>)
+    <span class="hljs-comment">// do your work in background thread</span>
+    launch {
+        delay(<span class="hljs-number">1000</span>)
+        observer.onNext(<span class="hljs-string">"1"</span>) <span class="hljs-comment">// publish data to observer</span>
+        observer.onNext(<span class="hljs-string">"2"</span>)
+        observer.onComplete() <span class="hljs-comment">// finish publishing</span>
+    }
+
+}
+
+observable.subscribe {
+        newVal -&gt; <span class="hljs-comment">// onNext</span>
+        println(<span class="hljs-string">"new val <span class="hljs-variable">$newVal</span>"</span>)
+}.disposedBy(bg) <span class="hljs-comment">// to release resources</span>
+
+observable.subscribe {
+        newVal -&gt; <span class="hljs-comment">// onNext</span>
+        println(<span class="hljs-string">"second new val <span class="hljs-variable">$newVal</span>"</span>)
+}.disposedBy(bg) <span class="hljs-comment">// to release resources</span>
+</div></code></pre>
+<h2 id="output">Output</h2>
+<pre class="hljs"><code><div>I/System.out: triggered with every subscriber. // first subscriber 
+I/System.out: triggered with every subscriber. // second subscriber 
+I/System.out: new val 1
+I/System.out: second new val 1
+I/System.out: new val 2
+I/System.out: second new val 2
+</div></code></pre>
+<ul>
+<li>First <strong>two lines for subscribtions</strong></li>
+<li>Then because of <code>observer.onNext(&quot;1&quot;)</code> so values are <strong>emitted</strong> to subscribers so output as third and fourth line.</li>
+<li>And same occured with <code>observer.onNext(&quot;2&quot;)</code>.</li>
+</ul>
+<hr>
+<h1 id="traits">Traits</h1>
+<pre class="hljs"><code><div><span class="hljs-comment">// Single</span>
+<span class="hljs-comment">/*
+* Single used when only single value is returned
+* has onSuccess (i.e same as onNext), onError
+*/</span>
+
+<span class="hljs-keyword">val</span> single = Single.create&lt;String&gt; {
+    <span class="hljs-keyword">val</span> success = <span class="hljs-literal">false</span>
+    <span class="hljs-keyword">if</span> (success) {
+        it.onSuccess(<span class="hljs-string">"Work done"</span>)
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">val</span> error = IllegalAccessException(<span class="hljs-string">"Fake error"</span>)
+        it.onError(error)
+    }
+}
+
+single.subscribe({ value -&gt; println(<span class="hljs-string">"single -&gt; <span class="hljs-variable">$value</span>"</span>) },
+        { error -&gt; println(<span class="hljs-string">"single error <span class="hljs-variable">$error</span>"</span>) }).disposedBy(bg)
+
+
+<span class="hljs-comment">// Completeable</span>
+<span class="hljs-keyword">val</span> completable = Completable.create {
+    <span class="hljs-comment">// do logic here</span>
+    <span class="hljs-keyword">val</span> success = <span class="hljs-literal">false</span>
+    <span class="hljs-keyword">if</span> (success) {
+        it.onComplete() <span class="hljs-comment">// indicate that task is done successfully</span>
+    } <span class="hljs-keyword">else</span> {
+        <span class="hljs-keyword">val</span> error = IllegalAccessException(<span class="hljs-string">"Fake error"</span>)
+        it.onError(error) <span class="hljs-comment">// error with doing Task</span>
+    }
+}
+
+completable.subscribe({ println(<span class="hljs-string">"Complete "</span>)} ,
+            {error -&gt; println(<span class="hljs-string">"error <span class="hljs-variable">$error</span>"</span> )}).disposedBy(bg)
+
+<span class="hljs-comment">// Maybe</span>
+<span class="hljs-keyword">val</span> maybe = Maybe.create&lt;String&gt; {
+    <span class="hljs-keyword">val</span> success = <span class="hljs-literal">true</span>
+    <span class="hljs-keyword">val</span> hasValue = <span class="hljs-literal">false</span>
+    <span class="hljs-keyword">if</span> (success){
+        <span class="hljs-keyword">if</span> (hasValue){
+            it.onSuccess(<span class="hljs-string">"new value "</span>)
+        }<span class="hljs-keyword">else</span>{
+            it.onComplete()
+        }
+    }<span class="hljs-keyword">else</span>{
+        <span class="hljs-keyword">val</span> error = IllegalAccessException(<span class="hljs-string">"Fake error"</span>)
+        it.onError(error) <span class="hljs-comment">// error with doing Task</span>
+    }
+}
+
+maybe.subscribe({ value -&gt; println(<span class="hljs-string">"May be value "</span>)} ,
+        {error -&gt; println (<span class="hljs-string">"Maybe error <span class="hljs-variable">$error</span>"</span>)} ,
+        {
+            println(<span class="hljs-string">"Complete Maybe"</span>)
+        }).disposedBy(bg)
+
+}
+</div></code></pre>
+<h2 id="output">Output</h2>
+<pre class="hljs"><code><div>I/System.out: single error java.lang.IllegalAccessException: Fake error
+I/System.out: error java.lang.IllegalAccessException: Fake error
+I/System.out: Complete Maybe
+
+</div></code></pre>
+
+</body>
+</html>

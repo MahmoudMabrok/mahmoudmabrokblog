@@ -1,0 +1,895 @@
+<!DOCTYPE html><html><head>
+      <title>Kotlin Essential Training Doc</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0-rc.1/dist/katex.min.css">
+      
+
+      <style> 
+      /**
+ * prism.js Github theme based on GitHub's theme.
+ * @author Sam Clarke
+ */
+code[class*="language-"],
+pre[class*="language-"] {
+  color: #333;
+  background: none;
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.4;
+
+  -moz-tab-size: 8;
+  -o-tab-size: 8;
+  tab-size: 8;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+  padding: .8em;
+  overflow: auto;
+  /* border: 1px solid #ddd; */
+  border-radius: 3px;
+  /* background: #fff; */
+  background: #f5f5f5;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
+  white-space: normal;
+  background: #f5f5f5;
+}
+
+.token.comment,
+.token.blockquote {
+  color: #969896;
+}
+
+.token.cdata {
+  color: #183691;
+}
+
+.token.doctype,
+.token.punctuation,
+.token.variable,
+.token.macro.property {
+  color: #333;
+}
+
+.token.operator,
+.token.important,
+.token.keyword,
+.token.rule,
+.token.builtin {
+  color: #a71d5d;
+}
+
+.token.string,
+.token.url,
+.token.regex,
+.token.attr-value {
+  color: #183691;
+}
+
+.token.property,
+.token.number,
+.token.boolean,
+.token.entity,
+.token.atrule,
+.token.constant,
+.token.symbol,
+.token.command,
+.token.code {
+  color: #0086b3;
+}
+
+.token.tag,
+.token.selector,
+.token.prolog {
+  color: #63a35c;
+}
+
+.token.function,
+.token.namespace,
+.token.pseudo-element,
+.token.class,
+.token.class-name,
+.token.pseudo-class,
+.token.id,
+.token.url-reference .token.variable,
+.token.attr-name {
+  color: #795da3;
+}
+
+.token.entity {
+  cursor: help;
+}
+
+.token.title,
+.token.title .token.punctuation {
+  font-weight: bold;
+  color: #1d3e81;
+}
+
+.token.list {
+  color: #ed6a43;
+}
+
+.token.inserted {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.token.deleted {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+
+/* JSON */
+.language-json .token.property {
+  color: #183691;
+}
+
+.language-markup .token.tag .token.punctuation {
+  color: #333;
+}
+
+/* CSS */
+code.language-css,
+.language-css .token.function {
+  color: #0086b3;
+}
+
+/* YAML */
+.language-yaml .token.atrule {
+  color: #63a35c;
+}
+
+code.language-yaml {
+  color: #183691;
+}
+
+/* Ruby */
+.language-ruby .token.function {
+  color: #333;
+}
+
+/* Markdown */
+.language-markdown .token.url {
+  color: #795da3;
+}
+
+/* Makefile */
+.language-makefile .token.symbol {
+  color: #795da3;
+}
+
+.language-makefile .token.variable {
+  color: #183691;
+}
+
+.language-makefile .token.builtin {
+  color: #0086b3;
+}
+
+/* Bash */
+.language-bash .token.keyword {
+  color: #0086b3;
+}html body{font-family:"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ul,html body>ol{margin-bottom:16px}html body ul,html body ol{padding-left:2em}html body ul.no-list,html body ol.no-list{padding:0;list-style-type:none}html body ul ul,html body ul ol,html body ol ol,html body ol ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:bold;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:bold}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em !important;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::before,html body code::after{letter-spacing:-0.2em;content:"\00a0"}html body pre>code{padding:0;margin:0;font-size:.85em !important;word-break:normal;white-space:pre;background:transparent;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;font-size:.85em !important;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:before,html body pre tt:before,html body pre code:after,html body pre tt:after{content:normal}html body p,html body blockquote,html body ul,html body ol,html body dl,html body pre{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body pre,html body code{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview .pagebreak,.markdown-preview .newpage{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center !important}.markdown-preview:not([for="preview"]) .code-chunk .btn-group{display:none}.markdown-preview:not([for="preview"]) .code-chunk .status{display:none}.markdown-preview:not([for="preview"]) .code-chunk .output-div{margin-bottom:16px}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0}@media screen and (min-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px)}}@media screen and (max-width:914px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode]) .markdown-preview{font-size:14px !important;padding:1em}}@media print{html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for="html-export"]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,0.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,0.66);border:4px solid rgba(150,150,150,0.66);background-clip:content-box}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{padding:0 1.6em;margin-top:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc li{margin-bottom:.8em}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc ul{list-style-type:none}html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% -  300px);padding:2em calc(50% - 457px -  150px);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for="html-export"]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for="html-export"]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+ 
+      </style>
+    </head>
+    <body for="html-export">
+      <div class="mume markdown-preview   ">
+      <h1 class="mume-header" id="history">History</h1>
+
+<ul>
+<li>announced in 2011.</li>
+<li>1.0 release was in 2016</li>
+<li>become <strong>first-class</strong> citizien in android eco system 2016</li>
+<li>Version 1.2 Nov 2017</li>
+</ul>
+<hr>
+<h1 class="mume-header" id="philosophy-of-kotlin">Philosophy of Kotlin</h1>
+
+<p>a statically typed language for multiple applications.</p>
+<h2 class="mume-header" id="concise">Concise</h2>
+
+<ul>
+<li>less code, boilerplates, keywords.</li>
+<li>generates code that explicity written with Java.</li>
+<li>Semicolon is not required !!.</li>
+</ul>
+<h2 class="mume-header" id="safe">Safe</h2>
+
+<ul>
+<li>null check</li>
+<li>auto-detecting of variable type.</li>
+</ul>
+<h2 class="mume-header" id="interoperable">Interoperable</h2>
+
+<ul>
+<li>Kotlin/JVM can be mixed with Java or any JVM lang.</li>
+<li>code works with JVM and Browser(Kotlin/JS).</li>
+</ul>
+<h2 class="mume-header" id="tool-friendly">Tool friendly</h2>
+
+<ul>
+<li>supported with Intelij IDEA and Android Studio.</li>
+</ul>
+<hr>
+<h1 class="mume-header" id="kotlin-byte-code">Kotlin &amp; Byte Code</h1>
+
+<ul>
+<li>
+<p>For Java</p>
+<ul>
+<li>each class compiles into a <code>.class</code> <strong>bytecode</strong> file which depend on classes that are in <strong>JRE</strong> which we sure it exists.</li>
+<li>file contains<code>only one pulblic class</code></li>
+</ul>
+</li>
+<li>
+<p>For Kotlin</p>
+<ul>
+<li>Starting Application for <strong>CLI</strong> not like a class but is top-level file that doesnot contain <code>class keyword</code> and must contain <strong>main method</strong>.</li>
+<li>this file is compiled also into <code>.class</code> file as JVM need it</li>
+<li>as we can not assume kotlin is installed on user machine so we write <code>java Mainkt --classpath kotlind-stdlib.jar ....</code></li>
+<li>every class is compiled into <code>.class</code></li>
+</ul>
+<hr>
+</li>
+</ul>
+<h1 class="mume-header" id="keywords">Keywords</h1>
+
+<ul>
+<li>
+<p>divided into <strong><em>two categories</em></strong>:-</p>
+<table>
+<thead>
+<tr>
+<th>Hard</th>
+<th>Soft</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>is reserved all time and in all places</td>
+<td>reserved in some scopes</td>
+</tr>
+<tr>
+<td>val, val, fun, class, interface,.. etc</td>
+<td>catch (in try clause), import, init , set , constructor, ..etc</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p><strong><em>Modifier keywords</em></strong> : are words that modifie hard keywords such as <code>open</code>, <code>data</code>, etc</p>
+</li>
+</ul>
+<hr>
+<h1 class="mume-header" id="variables">Variables</h1>
+
+<ul>
+<li>
+<p>are <strong><em>data container</em></strong></p>
+</li>
+<li>
+<p>declared using <code>val</code>, <code>var</code> as <code>var a = 10</code></p>
+<table>
+<thead>
+<tr>
+<th>val</th>
+<th>var</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>immutable</code> data (can not changed)</td>
+<td>mutable data</td>
+</tr>
+<tr>
+<td>must be have <code>intial value</code></td>
+<td>not neccessary</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>can write type or let kotlin infer it so <code>var a = 10</code> and  <code>var a : Int = 10</code>  are same.</p>
+</li>
+<li>
+<p>kotlin <strong><em>not auto casting</em></strong> for varibles so</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">10</span> 
+<span class="token keyword">var</span> b  <span class="token operator">:</span> Long <span class="token operator">=</span> a <span class="token comment">// will raise error although int is smaller than long.</span>
+<span class="token keyword">var</span> b  <span class="token operator">:</span> Long <span class="token operator">=</span> a<span class="token punctuation">.</span><span class="token function">toLong</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// Solution</span>
+</pre></li>
+<li>
+<p>for <strong>convention</strong> names start with lower case and use camel case for multiple words.</p>
+</li>
+<li>
+<p>for a <strong>constant</strong> variable we use</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">companion</span> <span class="token keyword">object</span> <span class="token punctuation">{</span>
+
+   <span class="token keyword">const</span> <span class="token keyword">val</span> FIXED_VAL <span class="token operator">=</span> <span class="token number">100</span> 
+<span class="token punctuation">}</span>
+</pre><p><strong>NOTE</strong> : should be all <code>upper</code>, use <code>_</code> for multpile words, <code>val</code> as it immutable</p>
+</li>
+<li>
+<p><code>Every thing is class</code> so int, short and other data types are <code>classes</code> that has functions such as (<code>plus</code>, <code>times</code>, <code>toInt</code>, <code>toLong</code>, <code>rem</code>, ..etc).</p>
+</li>
+<li>
+<p><strong><em>important point</em></strong>:</p>
+<table>
+<thead>
+<tr>
+<th>a++</th>
+<th>a.inc()</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>a is increamented</td>
+<td>a increamented <code>but to a new variable</code> so a value<code>not changed</code></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>when <strong>comparing</strong> values use <code>==</code> rather than <code>.equals</code> as first one use <strong>less code</strong> when be compiled as <code>==</code> compiler <strong>evalute</strong> it at compile time.</p>
+</li>
+</ul>
+<hr>
+<h1 class="mume-header" id="string">String</h1>
+
+<ul>
+<li>an array of characters.</li>
+<li>can be literal or object <code>val a = String() // accept array of character, bytes.</code> , but <code>val a = String(&quot;Hello&quot;)</code> is <strong>Worng</strong>.</li>
+<li>there are some useful functions such as <code>indexOf</code>, <code>substring</code>, <code>get(int)</code>.</li>
+<li>Strings are <strong>immutable</strong> so when change value kotlin <em>create objects in background</em> so use <strong>StringBuilder</strong> as same as in Java.</li>
+</ul>
+<hr>
+<h1 class="mume-header" id="constants">Constants</h1>
+
+<table>
+<thead>
+<tr>
+<th>val a = &quot;RED&quot;</th>
+<th>const val a = &quot;RED&quot;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>converted   into<code>private static final String a = &quot;RED&quot;;</code></td>
+<td>converted into <code>public static final String a = &quot;RED&quot;;</code></td>
+</tr>
+<tr>
+<td>also create a get Function</td>
+<td>does not create and value is <strong>evaluted at compile</strong>.</td>
+</tr>
+<tr>
+<td>slow</td>
+<td>fast</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>we create a class for constants as follows<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">class</span> Constants <span class="token punctuation">{</span>
+    <span class="token keyword">companion</span> <span class="token keyword">object</span> <span class="token punctuation">{</span>
+        <span class="token keyword">const</span> <span class="token keyword">val</span> A <span class="token operator">=</span> <span class="token string">&quot;A&quot;</span>
+        <span class="token annotation builtin">@JvmField</span> <span class="token keyword">val</span> B <span class="token operator">=</span> <span class="token string">&quot;B&quot;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// use them as </span>
+
+<span class="token function">println</span><span class="token punctuation">(</span>Constants<span class="token punctuation">.</span>A<span class="token punctuation">)</span>
+<span class="token function">println</span><span class="token punctuation">(</span>Constants<span class="token punctuation">.</span>B<span class="token punctuation">)</span>
+
+</pre><ul>
+<li><code>Constants.A</code> will be replace at <strong>compile time</strong> into <code>A</code></li>
+<li><code>Constants.B</code> will remain same.</li>
+<li>so first one is <strong>faster</strong> than second one.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 class="mume-header" id="function">Function</h1>
+
+<ul>
+<li>
+<p>unit that help us <strong>reuse code</strong></p>
+</li>
+<li>
+<p>same as Java but differs as it can be written <em>outside</em> a class <strong>as top-level</strong>.</p>
+</li>
+<li>
+<p>Syntax</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">main</span><span class="token punctuation">(</span>args<span class="token operator">:</span> Array<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">// we can use any arrangment of params as we use named one.</span>
+    <span class="token comment">// also op param is by default &apos;+&apos; </span>
+    <span class="token keyword">val</span> res <span class="token operator">=</span> <span class="token function">calc</span><span class="token punctuation">(</span>param2 <span class="token operator">=</span> <span class="token number">12</span> <span class="token punctuation">,</span>param1 <span class="token operator">=</span>  <span class="token number">8</span><span class="token punctuation">)</span> <span class="token comment">// res = 20</span>
+    <span class="token function">print</span><span class="token punctuation">(</span>res<span class="token punctuation">)</span>
+
+<span class="token punctuation">}</span>
+
+<span class="token keyword">fun</span> <span class="token function">calc</span> <span class="token punctuation">(</span>param1 <span class="token operator">:</span> Int <span class="token punctuation">,</span>param2 <span class="token operator">:</span> Int <span class="token punctuation">,</span> op <span class="token operator">:</span> String <span class="token operator">=</span> <span class="token string">&quot;+&quot;</span> <span class="token punctuation">)</span><span class="token operator">:</span> Int<span class="token punctuation">{</span>
+    <span class="token keyword">when</span> <span class="token punctuation">(</span>op<span class="token punctuation">)</span><span class="token punctuation">{</span> <span class="token comment">// is same as switch in Java </span>
+        <span class="token string">&quot;+&quot;</span> <span class="token operator">-&gt;</span> <span class="token keyword">return</span>  param1 <span class="token operator">+</span> param2
+        <span class="token string">&quot;-&quot;</span> <span class="token operator">-&gt;</span> <span class="token keyword">return</span>  param1 <span class="token operator">-</span> param2
+        <span class="token keyword">else</span> <span class="token operator">-&gt;</span> <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre><ul>
+<li>we notice
+<ul>
+<li>support <strong>named argument</strong></li>
+<li>support <strong>default values</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 class="mume-header" id="manage-null">Manage Null</h1>
+
+<p>here are code with different cases</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">    <span class="token keyword">var</span> a <span class="token operator">:</span> String<span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword">null</span>
+    <span class="token function">println</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span> <span class="token comment">// print null</span>
+    <span class="token function">println</span><span class="token punctuation">(</span>a<span class="token operator">?</span><span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token comment">// print null, you can not use a.length as a is nullable  </span>
+    <span class="token function">println</span><span class="token punctuation">(</span>a<span class="token operator">?</span><span class="token punctuation">.</span>length <span class="token operator">?:</span> <span class="token operator">-</span><span class="token number">1</span> <span class="token punctuation">)</span> <span class="token comment">// print -1 (Elvis operator )</span>
+    <span class="token function">println</span><span class="token punctuation">(</span>a<span class="token operator">!!</span><span class="token punctuation">.</span>length<span class="token punctuation">)</span> <span class="token comment">// Cause Kotlin NuLLPointerException.u can use try-catch to handle it </span>
+
+</pre><ul>
+<li>
+<p><code>println(a?.length)</code> is equiv to as check first if it equal to <code>null</code> it print <code>null</code> otherwise print value of length.</p>
+</li>
+<li>
+<p><code>println(a?.length ?: -1 )</code> same as last but provide a value instead of &apos;null&apos;</p>
+</li>
+<li>
+<p><code>println(a!!.length)</code> enforce call to <code>length</code> and handle exception by yourself.</p>
+</li>
+</ul>
+<hr>
+<h1 class="mume-header" id="iterate-over-collection">Iterate over Collection</h1>
+
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">main</span><span class="token punctuation">(</span>args<span class="token operator">:</span> Array<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">val</span> arr <span class="token operator">=</span> <span class="token function">arrayOf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">)</span>
+
+    <span class="token keyword">for</span><span class="token punctuation">(</span>item <span class="token keyword">in</span> arr<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">println</span><span class="token punctuation">(</span>item<span class="token punctuation">)</span> <span class="token comment">// print each item in a new line</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// until stop at max -1 (i.e max is excluded)</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span>index <span class="token keyword">in</span> <span class="token number">0</span> until arr<span class="token punctuation">.</span>size<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">println</span><span class="token punctuation">(</span>arr<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>index<span class="token punctuation">)</span><span class="token punctuation">)</span>  <span class="token comment">// print each item in a new line</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// indices return array of index, step 2 means to update each iteration with 2 </span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>index <span class="token keyword">in</span> arr<span class="token punctuation">.</span>indices step  <span class="token number">2</span> <span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">println</span><span class="token punctuation">(</span>arr<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>index<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</pre><ul>
+<li>output for first two codes is same <code>1 2 3 4 5</code>.</li>
+<li>last code output is <code>1 3 5</code>.</li>
+</ul>
+<hr>
+<h1 class="mume-header" id="exception">Exception</h1>
+
+<ul>
+<li>we use <code>try/catch</code> to handle exception and provide useable solution to it.</li>
+<li>kotlin <strong>does not support checked exception</strong> the reason it does not want to delgate exception handling outside this scope(i.e handle it by yourself) so <strong>no throws keyword</strong> exists.</li>
+<li>all exception inherit from <strong>Throwable</strong> class.</li>
+</ul>
+<hr>
+<h1 class="mume-header" id="create-library">Create Library</h1>
+
+<ul>
+<li>
+<p>we can write functions and wrap them into class to be used from one place</p>
+</li>
+<li>
+<p>we create a seperate class</p>
+</li>
+<li>
+<p>write all functions inside <strong>companion object</strong></p>
+</li>
+<li>
+<p>Example:-</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">class</span> MathLib<span class="token punctuation">{</span>
+    <span class="token keyword">companion</span> <span class="token keyword">object</span> <span class="token punctuation">{</span>
+        <span class="token keyword">fun</span> <span class="token function">add</span> <span class="token punctuation">(</span>param1 <span class="token operator">:</span> Int<span class="token punctuation">,</span> param2 <span class="token operator">:</span>Int<span class="token punctuation">)</span><span class="token operator">:</span> Int<span class="token punctuation">{</span>
+            <span class="token keyword">return</span> param1<span class="token punctuation">.</span><span class="token function">plus</span><span class="token punctuation">(</span>param2<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</pre></li>
+</ul>
+<hr>
+<h1 class="mume-header" id="class">Class</h1>
+
+<ul>
+<li>new data type, template, blueprint for object</li>
+<li>declared keyword <code>class</code></li>
+<li>it must has a <strong>primary constructor</strong></li>
+<li>it may contains serveral constructors but <strong>must each one call primary one</strong></li>
+<li>decalre <strong>secondary constructor</strong> by keyowrd <strong>constructor</strong></li>
+<li><strong>init block</strong> is called after calling to  primary constructor used to make <em>intial configuration</em>.</li>
+<li><strong>Note</strong> functions are by default are <strong>final</strong> so can not be overidden.</li>
+<li>Example:-<pre data-role="codeBlock" data-info="Kotlin" class="language-kotlin"><span class="token keyword">class</span> <span class="token function">Student</span><span class="token punctuation">(</span><span class="token keyword">var</span> name<span class="token operator">:</span>String<span class="token punctuation">,</span> <span class="token keyword">private</span> <span class="token keyword">var</span> _age<span class="token operator">:</span> Int<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token comment">// this is a secondary constructor, it must call primary one</span>
+    <span class="token keyword">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span><span class="token keyword">this</span><span class="token punctuation">(</span><span class="token string">&quot;na&quot;</span> <span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;Called from secondary &quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// is called after calling to primary constructor</span>
+    <span class="token keyword">init</span> <span class="token punctuation">{</span>
+        name <span class="token operator">=</span> name<span class="token punctuation">.</span><span class="token function">toUpperCase</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;Promary is called &quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">// make another one, provide a get and set</span>
+    <span class="token keyword">var</span> age <span class="token operator">:</span> Int <span class="token operator">=</span> _age
+    <span class="token keyword">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span> field
+    <span class="token keyword">set</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span> <span class="token punctuation">{</span> field <span class="token operator">=</span> value<span class="token punctuation">}</span>
+    
+<span class="token punctuation">}</span>
+
+</pre><ul>
+<li>to add some <strong>Encapsulation</strong> we decalre some variable with <code>private</code> that make var visible only inside its class and provide <strong>set</strong> , <strong>get</strong> for public use</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 class="mume-header" id="mix-kotlin-java">Mix Kotlin &amp; Java</h1>
+
+<ul>
+<li>
+<p><strong>Kotlin</strong> can use <strong>Java</strong> classes to do things that not provided yet in <strong>Kotlin</strong> or it may require more code</p>
+</li>
+<li>
+<p>for example <strong>Kotlin</strong> does not have <em>concurrency formating</em> so you must handle it explicity (i.e code to add symbol, code to decide local and write suitable symbol).</p>
+</li>
+<li>
+<p>Expamle:-</p>
+<pre data-role="codeBlock" data-info="Kotlin" class="language-kotlin">    <span class="token keyword">val</span> value <span class="token operator">=</span> <span class="token number">22</span>
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;It costs <span class="token interpolation"><span class="token delimiter variable">${</span>value<span class="token delimiter variable">}</span></span>$&quot;</span><span class="token punctuation">)</span>
+
+    
+    Locale<span class="token punctuation">.</span><span class="token function">setDefault</span><span class="token punctuation">(</span>Locale<span class="token punctuation">.</span>US<span class="token punctuation">)</span>
+    <span class="token keyword">val</span> formater <span class="token operator">:</span> NumberFormat <span class="token operator">=</span> NumberFormat<span class="token punctuation">.</span><span class="token function">getCurrencyInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;It costs <span class="token interpolation"><span class="token delimiter variable">${</span>formater<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token delimiter variable">}</span></span>&quot;</span><span class="token punctuation">)</span>
+
+  
+    Locale<span class="token punctuation">.</span><span class="token function">setDefault</span><span class="token punctuation">(</span>Locale<span class="token punctuation">.</span>FRANCE<span class="token punctuation">)</span>
+
+    <span class="token keyword">val</span> formater2 <span class="token operator">:</span> NumberFormat <span class="token operator">=</span> NumberFormat<span class="token punctuation">.</span><span class="token function">getCurrencyInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;It costs <span class="token interpolation"><span class="token delimiter variable">${</span>value<span class="token delimiter variable">}</span></span>&#x20AC;&quot;</span><span class="token punctuation">)</span>
+    <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;It costs <span class="token interpolation"><span class="token delimiter variable">${</span>formater2<span class="token punctuation">.</span><span class="token function">format</span><span class="token punctuation">(</span>value<span class="token punctuation">)</span><span class="token delimiter variable">}</span></span>&quot;</span><span class="token punctuation">)</span>
+
+
+</pre><ul>
+<li>here <code>formater</code> is reponsible of determine suitable currency symbol based on <code>Local</code></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 class="mume-header" id="packages">Packages</h1>
+
+<ul>
+<li>used to orgianze related classes, interface in one place</li>
+<li>use <code>package</code> keyword.</li>
+<li>By opposite of Java, <strong>Kotlin allow</strong> packages to be <strong>not like directory structure</strong>.</li>
+</ul>
+<hr>
+<h1 class="mume-header" id="collections">Collections</h1>
+
+<ul>
+<li>
+<p>Koltin provide fixed-size collection (Array) and non fixed-size (list, set,map).</p>
+</li>
+<li>
+<p>Array is a class in Kotlin</p>
+</li>
+<li>
+<p>if it contains <code>mixed types</code> its type will be <code>Any</code></p>
+</li>
+<li>
+<p>we can create array with a variety of methods</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token comment">// create array of values (here are of type Any as types are mixed )</span>
+<span class="token keyword">val</span>  arr <span class="token operator">=</span> <span class="token function">arrayOf</span><span class="token punctuation">(</span><span class="token string">&quot;10&quot;</span><span class="token punctuation">,</span> <span class="token number">12</span> <span class="token punctuation">,</span> <span class="token number">13</span> <span class="token punctuation">,</span> <span class="token number">14</span> <span class="token punctuation">)</span>
+<span class="token comment">// helper method create nulls of specified type, accept size </span>
+<span class="token keyword">val</span>  arr1Null <span class="token operator">=</span> arrayOfNulls<span class="token operator">&lt;</span>String<span class="token operator">?</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span>
+<span class="token comment">// // create array of integer values</span>
+<span class="token keyword">val</span>  arr1 <span class="token operator">=</span> <span class="token function">intArrayOf</span><span class="token punctuation">(</span><span class="token number">22</span> <span class="token punctuation">,</span> <span class="token number">10</span> <span class="token punctuation">)</span>
+
+<span class="token keyword">for</span><span class="token punctuation">(</span>element  <span class="token keyword">in</span> arr<span class="token punctuation">)</span> <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;Value is <span class="token interpolation variable">$element</span>&quot;</span> <span class="token punctuation">)</span>
+<span class="token comment">// will dislay null 10 times. </span>
+<span class="token keyword">for</span><span class="token punctuation">(</span>element  <span class="token keyword">in</span> arr1Null<span class="token punctuation">)</span> <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;Value is <span class="token interpolation variable">$element</span>&quot;</span> <span class="token punctuation">)</span>
+<span class="token keyword">for</span><span class="token punctuation">(</span>element  <span class="token keyword">in</span> arr1<span class="token punctuation">)</span> <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;Value is <span class="token interpolation variable">$element</span>&quot;</span> <span class="token punctuation">)</span>
+
+arr1<span class="token punctuation">.</span><span class="token function">sort</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span>item <span class="token keyword">in</span> arr1<span class="token punctuation">)</span> <span class="token function">println</span><span class="token punctuation">(</span>item<span class="token punctuation">)</span> <span class="token comment">// 10 22  </span>
+arr1<span class="token punctuation">.</span><span class="token function">sortedArrayDescending</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">for</span> <span class="token punctuation">(</span>item <span class="token keyword">in</span> arr1<span class="token punctuation">)</span> <span class="token function">println</span><span class="token punctuation">(</span>item<span class="token punctuation">)</span> <span class="token comment">// 22 10 </span>
+
+</pre><ul>
+<li><strong>Note</strong> :- <code>sort()</code> change arr content, <strong>but</strong> <code>sortedArrayDescending()</code> return a new obj.</li>
+</ul>
+</li>
+<li>
+<p>List, Set, Map comes with two version <strong>Mutable, Immutable</strong>.</p>
+</li>
+<li>
+<p><strong>List</strong> is same as <strong>Array</strong> but with facilty of <code>adding</code> and <code>removing</code> items.</p>
+</li>
+<li>
+<p><strong>Sets</strong> are<code>un-ordered unique elements.</code></p>
+</li>
+<li>
+<p><strong>Map</strong> is a <strong>key-value</strong> data structure which store data chained with a key.</p>
+</li>
+<li>
+<p>Example:-</p>
+</li>
+</ul>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">    <span class="token comment">// this is Immutable list so can not add/remove from it</span>
+    <span class="token keyword">val</span> list <span class="token operator">=</span> <span class="token function">listOf</span><span class="token punctuation">(</span><span class="token string">&quot;Ahmed&quot;</span> <span class="token punctuation">,</span> <span class="token string">&quot;Mahmoud&quot;</span><span class="token punctuation">)</span>
+    <span class="token comment">// this is mutable list</span>
+    <span class="token keyword">val</span> mulList <span class="token operator">=</span> <span class="token function">mutableListOf</span><span class="token punctuation">(</span><span class="token string">&quot;Ahmed&quot;</span> <span class="token punctuation">,</span> <span class="token string">&quot;Mahmoud&quot;</span><span class="token punctuation">)</span>
+    mulList<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token string">&quot;Hafez&quot;</span><span class="token punctuation">)</span>
+    mulList<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token number">0</span> <span class="token punctuation">,</span> <span class="token string">&quot;Hassan&quot;</span><span class="token punctuation">)</span>
+    mulList<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span><span class="token string">&quot;Ahmed&quot;</span><span class="token punctuation">)</span>
+    <span class="token function">println</span><span class="token punctuation">(</span>mulList<span class="token punctuation">)</span> <span class="token comment">// [Hassan, Mahmoud, Hafez]</span>
+
+    <span class="token comment">// this is Immutable Set so can not add/remove from it</span>
+    <span class="token keyword">val</span> <span class="token keyword">set</span> <span class="token operator">=</span> <span class="token function">setOf</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">)</span>
+    <span class="token comment">// this is mutable Set</span>
+    <span class="token keyword">val</span> mulset <span class="token operator">=</span> mutableSetOf<span class="token operator">&lt;</span>Int<span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">)</span>
+    <span class="token function">println</span><span class="token punctuation">(</span>mulset<span class="token punctuation">)</span> <span class="token comment">// [1, 2, 3, 4, 5] NOTE 2 is displayed only one time</span>
+
+    <span class="token comment">// this is mutable Map</span>
+    <span class="token keyword">val</span> map <span class="token operator">=</span> <span class="token function">mutableMapOf</span><span class="token punctuation">(</span><span class="token function">Pair</span><span class="token punctuation">(</span><span class="token string">&quot;Ahmed&quot;</span> <span class="token punctuation">,</span> <span class="token number">22</span><span class="token punctuation">)</span> <span class="token punctuation">,</span> <span class="token function">Pair</span><span class="token punctuation">(</span><span class="token string">&quot;Mahmoud&quot;</span> <span class="token punctuation">,</span> <span class="token number">23</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token comment">// put is used to add Pairs(Key , Value)</span>
+    map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span><span class="token string">&quot;Hassan&quot;</span> <span class="token punctuation">,</span> <span class="token number">21</span> <span class="token punctuation">)</span>
+    <span class="token comment">// display values is by calling get(key) or use this trick</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>name <span class="token punctuation">,</span> age<span class="token punctuation">)</span> <span class="token keyword">in</span> map<span class="token punctuation">)</span> <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot; name : <span class="token interpolation variable">$name</span> and Age is <span class="token interpolation variable">$age</span>&quot;</span><span class="token punctuation">)</span>
+
+</pre><ul>
+<li><strong>Note</strong> <code>listOf&lt;&gt;()</code> in angle brackets we can write type or let Kotlin to determine it.</li>
+</ul>
+<hr>
+<h1 class="mume-header" id="inheritance">Inheritance</h1>
+
+<ul>
+<li>its a semi analogy to human nature there are <code>Parent</code> and <code>Child</code>.</li>
+<li>class must be <strong>open</strong> to be inherited (<strong>by default classes are not open</strong>).</li>
+<li>base class is <code>Any</code> is like <code>Object</code> at Java (all classes inherit from it).</li>
+<li>Example:-</li>
+</ul>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">open</span> <span class="token keyword">class</span> <span class="token function">Animal</span> <span class="token punctuation">(</span><span class="token keyword">val</span> color<span class="token operator">:</span> String<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">fun</span> <span class="token function">walk</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;I am Walking&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">override</span> <span class="token keyword">fun</span>  <span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> String <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token string">&quot;Animal with <span class="token interpolation"><span class="token delimiter variable">${</span>color<span class="token delimiter variable">}</span></span>&quot;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> <span class="token function">Dog</span><span class="token punctuation">(</span>color<span class="token operator">:</span> String<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">Animal</span><span class="token punctuation">(</span>color <span class="token punctuation">)</span><span class="token punctuation">{</span>
+
+    <span class="token keyword">override</span> <span class="token keyword">fun</span>  <span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> String <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token keyword">this</span><span class="token operator">::</span><span class="token keyword">class</span><span class="token punctuation">.</span>simpleName
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</pre><hr>
+<h1 class="mume-header" id="interface">Interface</h1>
+
+<ul>
+<li>It is a <strong>contract</strong>.</li>
+<li>It is same as Java.</li>
+<li>concrete class must implement functions, member of interface.</li>
+<li>class can <strong>implement multiple interfaces</strong> but if two or more interface contain same function a <strong>conflict</strong> occurs.</li>
+<li>Code:-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">main</span><span class="token punctuation">(</span>args<span class="token operator">:</span> Array<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">val</span> lol <span class="token operator">=</span> <span class="token function">Retriever</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token keyword">val</span> moly <span class="token operator">=</span> <span class="token function">Sealer</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+    <span class="token function">makeSpeak</span><span class="token punctuation">(</span>lol<span class="token punctuation">)</span>
+    <span class="token function">makeSpeak</span><span class="token punctuation">(</span>moly<span class="token punctuation">)</span>
+    <span class="token comment">// make an anonymous object </span>
+    <span class="token function">makeSpeak</span><span class="token punctuation">(</span><span class="token keyword">object</span> <span class="token operator">:</span> Cat <span class="token punctuation">{</span>
+        <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">speak</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;Anonymous&quot;</span><span class="token punctuation">)</span>
+            <span class="token keyword">super</span><span class="token punctuation">.</span><span class="token function">speak</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span>
+
+
+<span class="token punctuation">}</span>
+
+<span class="token keyword">fun</span> <span class="token function">makeSpeak</span><span class="token punctuation">(</span>cat <span class="token operator">:</span> Cat<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    cat<span class="token punctuation">.</span><span class="token function">speak</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">interface</span> Cat <span class="token punctuation">{</span>
+    <span class="token keyword">fun</span> <span class="token function">speak</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;Cat&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">interface</span> Lion <span class="token punctuation">{</span>
+    <span class="token keyword">fun</span> <span class="token function">speak</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;Lion&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> Retriever <span class="token operator">:</span> Cat <span class="token punctuation">,</span> Lion <span class="token punctuation">{</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">speak</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">//  super.speak() // error, conflict there several implementation</span>
+        <span class="token keyword">super</span><span class="token operator">&lt;</span>Cat<span class="token operator">&gt;</span><span class="token punctuation">.</span><span class="token function">speak</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;Retriever &quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">class</span> Sealer <span class="token operator">:</span> Cat <span class="token punctuation">,</span> Lion <span class="token punctuation">{</span>
+    <span class="token keyword">override</span> <span class="token keyword">fun</span> <span class="token function">speak</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token operator">&lt;</span>Lion<span class="token operator">&gt;</span><span class="token punctuation">.</span><span class="token function">speak</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;Sealer &quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/*
+Output:-
+Cat
+Retriever 
+Lion
+Sealer 
+Anonymous
+Cat
+*/</span>
+</pre><strong>Notes</strong>
+<ul>
+<li>class can implement several interface but can face <code>conflict</code> when two or more interface have same method like <code>speak</code> and try to <strong>call super.speak</strong> which will raise error so Solution with <code>super&lt;Cat&gt;.speak()</code></li>
+<li><strong>Kotlin</strong> interfaces can have <strong>default implementation</strong></li>
+<li><code>makeSpeak</code> is example of using <strong>polymorphism</strong> as it accept any obj from type of <code>Cat</code> as it run with <code>sealer</code>, <code>retriever</code> which are if type <code>Cat</code></li>
+<li>we use <strong>Anonymous object</strong> which in it we <strong>do not need to a named variable</strong> to hold object just implement it at function and function will call object functions
+<ul>
+<li>to understand it more we write <code>object : Cat {}</code> it seems as we create a concreate class that implements Cat and make object from it.</li>
+</ul>
+</li>
+<li><strong>Anonymous object</strong> can be decalred with a concise syntax using <strong>lambda expression</strong></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 class="mume-header" id="lambda-expression">Lambda Expression</h1>
+
+<ul>
+<li>we can replace functions or anonymous object with lambda.</li>
+<li>with a concise syntax for example<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin">    <span class="token keyword">val</span> sayHallo <span class="token operator">=</span> <span class="token punctuation">{</span>
+    name <span class="token operator">:</span> String<span class="token punctuation">,</span> age <span class="token operator">:</span> Int <span class="token operator">-&gt;</span>  <span class="token function">println</span><span class="token punctuation">(</span><span class="token string">&quot;hello <span class="token interpolation variable">$name</span> and age <span class="token interpolation variable">$age</span>&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token function">sayHallo</span><span class="token punctuation">(</span><span class="token string">&quot;Ahmed&quot;</span> <span class="token punctuation">,</span> <span class="token number">21</span> <span class="token punctuation">)</span>
+    sayHallo<span class="token punctuation">.</span><span class="token function">invoke</span><span class="token punctuation">(</span><span class="token string">&quot;Ahmed&quot;</span> <span class="token punctuation">,</span> <span class="token number">21</span> <span class="token punctuation">)</span>
+
+    <span class="token function">println</span><span class="token punctuation">(</span>sayHallo<span class="token operator">::</span><span class="token keyword">class</span><span class="token punctuation">.</span>simpleName<span class="token punctuation">)</span>
+    
+    <span class="token keyword">val</span> arr <span class="token operator">=</span> <span class="token function">arrayOf</span><span class="token punctuation">(</span><span class="token string">&quot;Ahmed&quot;</span> <span class="token punctuation">,</span> <span class="token string">&quot;Mohamed&quot;</span> <span class="token punctuation">,</span> <span class="token string">&quot;Ali&quot;</span><span class="token punctuation">)</span>
+    <span class="token comment">// item represent a element from array is sent as parameter to sorted by</span>
+    <span class="token keyword">val</span> sorted <span class="token operator">=</span> arr<span class="token punctuation">.</span><span class="token function">sortedBy</span> <span class="token punctuation">{</span> item <span class="token operator">:</span> String <span class="token operator">-&gt;</span> item<span class="token punctuation">.</span>length <span class="token punctuation">}</span>
+    <span class="token function">println</span><span class="token punctuation">(</span>sorted<span class="token punctuation">)</span>
+    <span class="token comment">// use it as we expect only one paramter</span>
+    <span class="token keyword">val</span> filtered <span class="token operator">=</span>   arr<span class="token punctuation">.</span><span class="token function">filter</span> <span class="token punctuation">{</span> it<span class="token punctuation">.</span><span class="token function">startsWith</span><span class="token punctuation">(</span><span class="token string">&quot;A&quot;</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
+    <span class="token function">println</span><span class="token punctuation">(</span>filtered<span class="token punctuation">)</span>
+
+    <span class="token comment">/*
+    Output:- 
+    hello Ahmed and age 21
+    hello Ahmed and age 21
+    sayHallo$1
+    [Ali, Ahmed, Mohamed]
+    [Ahmed, Ali]
+    */</span>
+
+</pre><strong>Note</strong>
+<ul>
+<li><code>sayHallo</code> is treated as object.</li>
+<li>with <code>sayHallo::class.simpleName</code> it prints <code>sayHallo$1</code> indicates its of type sayHallo</li>
+<li><code>sortedBy</code> expect a <strong>Predicat</strong> that accept a string and return a value to sort based on it.</li>
+<li>if we expect <strong>only one paramter</strong> we can use <code>it</code> as in <code>arr.filter { it.startsWith(&quot;A&quot;)}</code> <strong>filter</strong> used to select items based on <code>selection criteria</code> passed as lambda.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 class="mume-header" id="data-class">data class</h1>
+
+<ul>
+<li>It works as <strong>POJO</strong> (<strong>Plain Old Java Object</strong>) class used as model class.</li>
+<li>just use <code>data</code> keyword before class and provide properties as primary constructor.</li>
+<li>it generates <code>setter</code>, <code>getter</code>, <code>toString</code>, <code>hashCode</code> methods by default.</li>
+<li>Example:-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">data</span> <span class="token keyword">class</span> <span class="token function">Item</span> <span class="token punctuation">(</span><span class="token keyword">var</span> name <span class="token operator">:</span> String <span class="token punctuation">,</span>
+                <span class="token keyword">var</span> price <span class="token operator">:</span> Float  <span class="token punctuation">)</span>
+</pre></li>
+</ul>
+<hr>
+<h1 class="mume-header" id="abstract-sealed-class">abstract &amp; sealed class</h1>
+
+<ul>
+<li><strong>sealed class</strong> used as <strong>abstract</strong> class in <strong>Java</strong> to provide a hierrachy a common class.</li>
+<li><strong>sealed class</strong> and its sub must be in same code file</li>
+<li>Code:-<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">fun</span> <span class="token function">main</span><span class="token punctuation">(</span>args<span class="token operator">:</span> Array<span class="token operator">&lt;</span>String<span class="token operator">&gt;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+
+    <span class="token keyword">val</span> item1 <span class="token operator">=</span> <span class="token function">Shirt</span><span class="token punctuation">(</span> <span class="token string">&quot;XL&quot;</span><span class="token punctuation">,</span><span class="token number">21.4</span> <span class="token punctuation">)</span>
+    <span class="token keyword">val</span> item2 <span class="token operator">=</span> <span class="token function">Paints</span><span class="token punctuation">(</span> <span class="token string">&quot;XX&quot;</span><span class="token punctuation">,</span><span class="token number">25.4</span> <span class="token punctuation">)</span>
+
+    <span class="token keyword">val</span> mostexpensive <span class="token operator">=</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>item1<span class="token punctuation">.</span>price <span class="token operator">&gt;</span> item2<span class="token punctuation">.</span>price<span class="token punctuation">)</span> item1 <span class="token keyword">else</span> item2
+
+    <span class="token keyword">val</span> instriction <span class="token operator">=</span> <span class="token keyword">when</span><span class="token punctuation">(</span>mostexpensive<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">is</span> Shirt <span class="token operator">-&gt;</span> <span class="token string">&quot;Button it!&quot;</span>
+        <span class="token keyword">is</span> Paints <span class="token operator">-&gt;</span> <span class="token string">&quot;Buckle it!&quot;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token function">println</span><span class="token punctuation">(</span>instriction<span class="token punctuation">)</span> <span class="token comment">// Buckle it! </span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">sealed</span> <span class="token keyword">class</span> <span class="token function">ClothingItem</span> <span class="token punctuation">(</span><span class="token keyword">val</span> type<span class="token operator">:</span>String<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">abstract</span> <span class="token keyword">val</span> size<span class="token operator">:</span>String
+    <span class="token keyword">abstract</span> <span class="token keyword">val</span> price<span class="token operator">:</span>Double
+<span class="token punctuation">}</span>
+
+<span class="token keyword">data</span> <span class="token keyword">class</span> <span class="token function">Shirt</span><span class="token punctuation">(</span><span class="token keyword">override</span> <span class="token keyword">val</span> size<span class="token operator">:</span> String<span class="token punctuation">,</span>
+                <span class="token keyword">override</span> <span class="token keyword">val</span> price<span class="token operator">:</span> Double<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">ClothingItem</span><span class="token punctuation">(</span><span class="token string">&quot;Shirt&quot;</span><span class="token punctuation">)</span>
+
+<span class="token keyword">data</span> <span class="token keyword">class</span> <span class="token function">Paints</span><span class="token punctuation">(</span><span class="token keyword">override</span> <span class="token keyword">val</span> size<span class="token operator">:</span> String<span class="token punctuation">,</span>
+                <span class="token keyword">override</span> <span class="token keyword">val</span> price<span class="token operator">:</span> Double<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">ClothingItem</span><span class="token punctuation">(</span><span class="token string">&quot;Paints&quot;</span><span class="token punctuation">)</span>
+
+</pre><strong>Note</strong>: in <code>when</code> statement if you not write all cases of <strong>sealed class</strong> or provide <code>else</code> so compiler will raise an error as compiler all types of <strong>sealed class</strong>.</li>
+</ul>
+<hr>
+<p><strong>Thanks to Allah</strong>, last update 23/9/2019</p>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    </body></html>

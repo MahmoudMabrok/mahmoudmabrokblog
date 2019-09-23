@@ -14,8 +14,10 @@
      -  [lesson 2](rx/rx2.html)    
 
 ## Coursers Documentation & Notes.
+- Kotlin Essential Training [Lynda](https://www.lynda.com/Software-Development-tutorials/Kotlin-Essential-Training/661774-2.html)
+  - [Docs](courses/kotlin.html)
 - Java Testing with JUnit [Lynda](https://www.lynda.com/Java-tutorials/Using-JUnit-Testing-Java/520534-2.html)
-  - [Docs](courses/JUnit.html)
+  - [Docs](courses/JUnit.html)   
 
 
 ## Apps

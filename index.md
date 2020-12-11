@@ -14,6 +14,9 @@
      -  [lesson 2](rx/rx2.html)    
 
 ## Coursers Documentation & Notes.
+- Android Apps with Kotlin: ViewModel and Lifecycle [Plurashight]([sasasasasasa](https://app.pluralsight.com/library/courses/android-apps-kotlin-viewmodel-lifecycle/table-of-contents))
+  - [Notes](ViewModel.html)
+
 - Kotlin Essential Training [Lynda](https://www.lynda.com/Software-Development-tutorials/Kotlin-Essential-Training/661774-2.html)
   - [Docs](courses/kotlin.html)
 - Java Testing with JUnit [Lynda](https://www.lynda.com/Java-tutorials/Using-JUnit-Testing-Java/520534-2.html)

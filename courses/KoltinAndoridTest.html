@@ -1,14 +1,9 @@
 <!DOCTYPE html><html><head>
-      <title>Mahmoud Mabrouk Blog</title>
+      <title>KoltinAndoridTest</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       
       <link rel="stylesheet" href="file:////home/owner/.vscode/extensions/shd101wyy.markdown-preview-enhanced-0.5.14/node_modules/@shd101wyy/mume/dependencies/katex/katex.min.css">
-      
-      
-      
-      
-      
       
       
       
@@ -261,75 +256,173 @@ pre[data-line] .line-highlight[data-end]:after {
     </head>
     <body for="html-export">
       <div class="mume markdown-preview  ">
-      <h2 class="mume-header" id="%D9%85%D8%B1%D8%AD%D8%A8%D8%A7-%D8%A8%D9%83%D9%85-%D9%81%D9%89-%D8%A7%D9%84%D9%85%D8%AF%D9%88%D9%86%D8%A9-%D8%A7%D9%84%D8%B4%D8%AE%D8%B5%D9%8A%D8%A9">&#x645;&#x631;&#x62D;&#x628;&#x627; &#x628;&#x643;&#x645; &#x641;&#x649; &#x627;&#x644;&#x645;&#x62F;&#x648;&#x646;&#x629; &#x627;&#x644;&#x634;&#x62E;&#x635;&#x64A;&#x629;</h2>
-
-<p>&#x648;&#x644;&#x623;&#x646; &#x632;&#x643;&#x627;&#x629; &#x627;&#x644;&#x639;&#x644;&#x645; &#x646;&#x634;&#x631;&#x647; &#x633;&#x64A;&#x62A;&#x645; &#x645;&#x634;&#x627;&#x631;&#x643;&#x629; &#x643;&#x644; &#x627;&#x644;&#x645;&#x639;&#x644;&#x648;&#x645;&#x627;&#x62A; &#x648;&#x627;&#x644;&#x634;&#x631;&#x648;&#x62D;&#x627;&#x62A; &#x627;&#x644;&#x645;&#x62E;&#x62A;&#x644;&#x641;&#x629; &#x639;&#x644;&#x649; &#x647;&#x630;&#x629; &#x627;&#x644;&#x645;&#x62F;&#x648;&#x646;&#x629;</p>
-<h2 class="mume-header" id="articles">Articles</h2>
+      <h1 class="mume-header" id="gradle">Gradle</h1>
 
 <ul>
-<li><a href="notes/serializable_parcelable.html">Serializable VS Parcelable</a></li>
-<li><a href="notes/GarbagCollector.html">Garbag Collector (GC)</a>.</li>
-<li><a href="notes/weak_reference.html">Weak, Strong, Soft,Phantom Reference()</a>.</li>
-<li><a href="notes/weakHashMap.html">WeakHashMap</a>.</li>
-</ul>
-<h2 class="mume-header" id="series">Series</h2>
-
+<li>simplifies <strong>manage android builds</strong></li>
+<li>there are 3 build <strong>directive</strong>
 <ul>
-<li>RxJava &amp; RxAndroidt(To be continued later)
-<ul>
-<li><a href="rx/rx1.html">lesson 1</a></li>
-<li><a href="rx/rx2.html">lesson 2</a></li>
+<li><strong>implementation</strong>: for all build variant</li>
+<li><strong>testImplementation</strong>: for JVM tests</li>
+<li><strong>androidTestImplementation</strong>: for Android UI tests</li>
 </ul>
 </li>
 </ul>
-<h2 class="mume-header" id="coursers-documentation-notes">Coursers Documentation &amp; Notes.</h2>
+<h1 class="mume-header" id="android-support-library">Android Support Library</h1>
+
+<ul>
+<li>Added to support <strong>backward comptability</strong>: provide <strong>new</strong> fearture to <strong>old</strong> versions of android</li>
+<li>Add some helper class and utitlites specially for UI such as (<strong>RecyclerView</strong>, <strong>CardView</strong>)</li>
+<li>Add <strong>testing</strong> support library</li>
+<li>As it <strong>too big</strong> it was <strong>divided</strong> into (<strong>v4</strong>  ,<strong>v7</strong> ,<strong>v13</strong>) and recently minumun supported is api <strong>14</strong>.</li>
+<li>for example<br>
+<code>implementation &apos;com.android.support:appcompat-v7:27.0.0&apos;</code></li>
+</ul>
+<h1 class="mume-header" id="androidx">AndroidX</h1>
+
+<ul>
+<li>Added to simplify <strong>versioning</strong> of support library</li>
+<li>so for appcomapt it became <code>implementation &apos;androidx.appcompat:appcompat:1.0.0&apos;</code></li>
+</ul>
+<h1 class="mume-header" id="android-ktx">Android KTX</h1>
+
+<ul>
+<li>part of <strong>AndroidX</strong></li>
+<li>added to make android dev <strong>more simpler</strong> and use Kotlin language features.</li>
+<li>to use it: <code>implementation &apos;androidx.core:core-ktx:1.0.0&apos;</code></li>
+</ul>
+<h1 class="mume-header" id="testing">Testing</h1>
 
 <ul>
 <li>
-<p>Android Apps with Kotlin: Tools and Testing <a href="https://app.pluralsight.com/library/courses/android-apps-kotlin-tools-testing/table-of-contents">Plurashight</a></p>
+<p>testing bacame a <strong>core function</strong> for app development to build a quality software.</p>
+</li>
+<li>
+<p>Android test require <em>physical device</em> or <em>emulator</em> which make tests take more time so we <strong>divide</strong> tests <strong>into</strong>:</p>
 <ul>
-<li><a href="courses/KoltinAndoridTest.html">Notes</a></li>
+<li><strong>logic-based</strong> test: use JVM tests with JUnit framwork.</li>
+<li><strong>android-based</strong> tests: use instrumentaion tests.</li>
 </ul>
 </li>
 <li>
-<p>Android Apps with Kotlin: ViewModel and Lifecycle <a href="%5Bsasasasasasa%5D(https://app.pluralsight.com/library/courses/android-apps-kotlin-viewmodel-lifecycle/table-of-contents)">Plurashight</a></p>
+<p>Each test is a function with <code>@Test</code> annotation</p>
+</li>
+<li>
+<p>we use <code>Assert class</code> from <code>org.junit.Assert</code> as a <strong>judge</strong> to tests</p>
+</li>
+<li>
+<p>exmaple</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token keyword">class</span> ExampleUnitTest <span class="token punctuation">{</span>
+    
+    
+    <span class="token annotation builtin">@Test</span>
+    <span class="token keyword">fun</span> <span class="token function">addition_isCorrect</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">assertEquals</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">2</span> <span class="token operator">+</span> <span class="token number">2</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</pre></li>
+<li>
+<p>There are many assert helper methods such as</p>
 <ul>
-<li><a href="ViewModel.html">Notes</a></li>
+<li><strong>assertEquals</strong>: use <code>equals()</code> function</li>
+<li><strong>assertSame</strong>: compare references</li>
+<li><strong>assertNull</strong>: check if it is <em>null</em></li>
 </ul>
 </li>
 <li>
-<p>Kotlin Essential Training <a href="https://www.lynda.com/Software-Development-tutorials/Kotlin-Essential-Training/661774-2.html">Lynda</a></p>
+<p>Also we should pay attention to test consistency(tests should not effect other tests , i.e each test run run with same state), this done by:</p>
 <ul>
-<li><a href="courses/kotlin.html">Docs</a></li>
-</ul>
-</li>
-<li>
-<p>Java Testing with JUnit <a href="https://www.lynda.com/Java-tutorials/Using-JUnit-Testing-Java/520534-2.html">Lynda</a></p>
-<ul>
-<li><a href="courses/JUnit.html">Docs</a></li>
+<li><code>@Before</code> <strong>method</strong> which used to <strong>setup</strong> environment for each test as it run before every test</li>
+<li><code>@After</code> <strong>method</strong> which runs after each test used to <strong>tearDown</strong> resources</li>
 </ul>
 </li>
 </ul>
-<h2 class="mume-header" id="apps">Apps</h2>
+<h1 class="mume-header" id="automated-ui-tests">Automated UI tests</h1>
 
 <ul>
-<li><a href="https://github.com/MahmoudMabrok/QuranyApp">HollyQuran</a></li>
-<li><a href="https://github.com/MahmoudMabrok/Quizzy_app">QuizzyApp</a></li>
-<li><a href="https://play.google.com/store/apps/details?id=com.mahmoudmabrok.kartony">Kartoony</a></li>
-<li><a href="https://play.google.com/store/apps/details?id=com.mahmoudmabrok.hadibadi">HadiBadi</a></li>
-<li><a href="https://play.google.com/store/apps/details?id=education.mahmoud.xo">TicTacToi</a></li>
-<li><a href="https://play.google.com/store/apps/details?id=com.mahmoudmabrok.azakri">Azkari</a></li>
-<li><a href="https://play.google.com/store/apps/details?id=learnkotlin.mahmoud.numberfighter">TimeFighter</a></li>
-<li><a href="https://play.google.com/store/apps/details?id=education.mahmoud.playnumbers">Play With Numbers</a></li>
+<li>Now we need to do <strong>android-based tests</strong> that need Android environment.</li>
+<li>will need 3 parts:
+<ul>
+<li><strong>Tests</strong> defined with <code>@Test</code>.</li>
+<li><strong>Runner</strong> that run tests on device: defined with <code>@RunWith</code></li>
+<li><strong>Physical</strong> device or <strong>emulator</strong></li>
 </ul>
-<h2 class="mume-header" id="contacts-personal-data">Contacts &amp; personal Data</h2>
+</li>
+</ul>
+<h2 class="mume-header" id="to-write-test-we-will-need">To write test we will need</h2>
 
 <ul>
-<li><strong>Email:-</strong>  <a href="mailto:mahmoudmabrok3579@gmail.com">mahmoudmabrok3579@gmail.com</a></li>
-<li><a href="http://bit.ly/2Ja1RyX">My CV</a></li>
-<li><a href="https://www.linkedin.com/in/mahmoud-mabrouk-fouad-41a318b3/">Linkedin</a></li>
-<li><a href="https://www.youtube.com/channel/UCj6g2CVt-AmattZH1ESa1rg">Youtube</a></li>
-<li><a href="https://github.com/MahmoudMabrok">Github</a></li>
+<li>
+<p><strong>ViewMatcher</strong>: provide <em>matcher</em> for android views, will be used to <strong>specify</strong> what <strong>view</strong> we need to interact with.</p>
+<ul>
+<li>examples (<code>withId</code>, <code>withText</code>, <code>isDisplayed</code>, <code>isChecked</code>, <code>equalTo</code>,  <code>allOf</code>, <code>anyOf</code>)</li>
+</ul>
+</li>
+<li>
+<p><strong>ViewActions</strong>: used to perform action of a view</p>
+<ul>
+<li>exmaples (<code>click</code>, <code>typeText</code>, <code>replaceText</code>, <code>closeSoftKeyboard</code>)</li>
+</ul>
+</li>
+<li>
+<p><strong>NOTE</strong>: we will need to run activity by using <code>ActivityTestRule</code> that run activity before each test</p>
+</li>
+<li>
+<p><strong>ViewAssertions</strong>: used to <strong>check</strong> specific action/view is <strong>done</strong> example (<code>matches</code> which accept one of <strong>ViewMatchers</strong> )</p>
+</li>
+<li>
+<p>exmaple</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token annotation builtin">@RunWith</span><span class="token punctuation">(</span>AndroidJUnit4ClassRunner<span class="token operator">::</span><span class="token keyword">class</span><span class="token punctuation">)</span>
+<span class="token keyword">class</span> ReminderViewModelTest <span class="token punctuation">{</span>
+
+    <span class="token annotation builtin">@get:Rule</span>
+    <span class="token keyword">val</span> activityRule <span class="token operator">=</span> <span class="token function">ActivityTestRule</span><span class="token punctuation">(</span>MainActivity<span class="token operator">::</span><span class="token keyword">class</span><span class="token punctuation">.</span>java<span class="token punctuation">)</span>
+
+    <span class="token annotation builtin">@Test</span>
+    <span class="token keyword">fun</span> <span class="token function">getReminders</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">val</span> reminderName <span class="token operator">=</span> <span class="token string">&quot;TestAA&quot;</span>
+        <span class="token comment">// open add activity</span>
+        <span class="token function">onView</span><span class="token punctuation">(</span><span class="token function">withId</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>fab<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">perform</span><span class="token punctuation">(</span><span class="token function">click</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token comment">// type text</span>
+        <span class="token function">onView</span><span class="token punctuation">(</span><span class="token function">withId</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>edReminder<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">perform</span><span class="token punctuation">(</span><span class="token function">typeText</span><span class="token punctuation">(</span>reminderName<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token comment">// close kb</span>
+        <span class="token function">closeSoftKeyboard</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token comment">// click add button</span>
+        <span class="token function">onView</span><span class="token punctuation">(</span><span class="token function">withId</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>btnAdd<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">perform</span><span class="token punctuation">(</span><span class="token function">click</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token comment">// go back</span>
+        <span class="token function">pressBack</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token comment">// make sure note is added</span>
+        <span class="token function">onView</span><span class="token punctuation">(</span><span class="token function">withText</span><span class="token punctuation">(</span>reminderName<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">check</span><span class="token punctuation">(</span>ViewAssertions<span class="token punctuation">.</span><span class="token function">matches</span><span class="token punctuation">(</span><span class="token function">isDisplayed</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</pre></li>
+</ul>
+<h2 class="mume-header" id="test-adapterview-items">Test AdapterView items</h2>
+
+<ul>
+<li>
+<p>It is special case to test data with <strong>views</strong> that use <strong>Adapter</strong> pattern such as (<code>ListView</code>, <code>Spinner</code>, etc)</p>
+</li>
+<li>
+<p>code</p>
+<pre data-role="codeBlock" data-info="kotlin" class="language-kotlin"><span class="token comment">// first click so spinner open its dropDown list</span>
+<span class="token function">onView</span><span class="token punctuation">(</span><span class="token function">withId</span><span class="token punctuation">(</span>R<span class="token punctuation">.</span>id<span class="token punctuation">.</span>spinnerView<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">perform</span><span class="token punctuation">(</span><span class="token function">click</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment">// select item</span>
+<span class="token function">onData</span><span class="token punctuation">(</span><span class="token function">allOf</span><span class="token punctuation">(</span><span class="token function">instanceOf</span><span class="token punctuation">(</span>Reminder<span class="token operator">::</span><span class="token keyword">class</span><span class="token punctuation">.</span>java<span class="token punctuation">)</span> <span class="token punctuation">,</span> <span class="token function">equalTo</span><span class="token punctuation">(</span><span class="token function">ReminderItem</span><span class="token punctuation">(</span><span class="token string">&quot;message&quot;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">perform</span><span class="token punctuation">(</span><span class="token function">click</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</pre><ul>
+<li><strong>Note</strong>: add <code>import org.hamcrest.Matchers.*</code> to able to use (<code>allOf</code> ,<code>instanceOf</code>,<code>equalTo</code>)</li>
+</ul>
+</li>
+<li>
+<p>some cases with match,assert:</p>
+<ul>
+<li><code>onView(allOf(withId(R.id.fab) , isEnabled())).perform(click())</code></li>
+<li><code>onView(allOf(withId(R.id.fab) , isEnabled())).check(ViewAssertions.doesNotExist())</code></li>
+</ul>
+</li>
 </ul>
 
       </div>
@@ -341,8 +434,7 @@ pre[data-line] .line-highlight[data-end]:after {
     
     
     
-      <a href="https://info.flagcounter.com/RfzR"><img src="https://s01.flagcounter.com/countxl/RfzR/bg_FFFFFF/txt_000000/border_CCCCCC/columns_3/maxflags_12/viewers_0/labels_1/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
-
+    
     
   
     </body></html>

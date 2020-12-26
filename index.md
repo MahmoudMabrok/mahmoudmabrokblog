@@ -14,6 +14,8 @@
      -  [lesson 2](rx/rx2.html)    
 
 ## Coursers Documentation & Notes.
+- Android Apps with Kotlin: Tools and Testing [Plurashight](https://app.pluralsight.com/library/courses/android-apps-kotlin-tools-testing/table-of-contents)
+  - [Notes](courses/KoltinAndoridTest.html)
 - Android Apps with Kotlin: ViewModel and Lifecycle [Plurashight]([sasasasasasa](https://app.pluralsight.com/library/courses/android-apps-kotlin-viewmodel-lifecycle/table-of-contents))
   - [Notes](ViewModel.html)
 

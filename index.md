@@ -14,6 +14,8 @@
      -  [lesson 2](rx/rx2.html)    
 
 ## Coursers Documentation & Notes.
+- typescript essential training[LinkedIn](https://www.linkedin.com/learning/typescript-essential-training-14687057) 
+  - [Notes](courses/typescript.md)
 - Android Apps with Kotlin: Tools and Testing [Plurashight](https://app.pluralsight.com/library/courses/android-apps-kotlin-tools-testing/table-of-contents)
   - [Notes](courses/KoltinAndoridTest.html)
 - Android Apps with Kotlin: ViewModel and Lifecycle [Plurashight]([sasasasasasa](https://app.pluralsight.com/library/courses/android-apps-kotlin-viewmodel-lifecycle/table-of-contents))

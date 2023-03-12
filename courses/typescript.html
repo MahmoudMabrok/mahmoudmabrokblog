@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
- <title>Mahmoud Mabrouk Blog</title>
+<title>typescript.md</title>
 <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
 
 <style>
@@ -365,80 +365,141 @@ code {
           : 'default'
     });
   </script>
-<h2 id="%D9%85%D8%B1%D8%AD%D8%A8%D8%A7-%D8%A8%D9%83%D9%85-%D9%81%D9%89-%D8%A7%D9%84%D9%85%D8%AF%D9%88%D9%86%D8%A9-%D8%A7%D9%84%D8%B4%D8%AE%D8%B5%D9%8A%D8%A9">مرحبا بكم فى المدونة الشخصية</h2>
-<p>ولأن زكاة العلم نشره سيتم مشاركة كل المعلومات والشروحات المختلفة على هذة المدونة</p>
-<h2 id="articles">Articles</h2>
+<h1 id="using-type-alias">using type alias</h1>
+<p>Used normally to give a new name for existing type or construct a new type.
+<code>type ContactAddress = string</code> it is actual string type but has different name.
+other useful uses can be:</p>
 <ul>
-<li><a href="notes/serializable_parcelable.html">Serializable VS Parcelable</a></li>
-<li><a href="notes/GarbagCollector.html">Garbag Collector (GC)</a>.</li>
-<li><a href="notes/weak_reference.html">Weak, Strong, Soft,Phantom Reference()</a>.</li>
-<li><a href="notes/weakHashMap.html">WeakHashMap</a>.</li>
-</ul>
-<h2 id="series">Series</h2>
+<li><code>type ContactAddress = string | Date</code>: says it can be one type of string, Data.</li>
+<li><code>type ContactAddress = Contact &amp; Address</code>: combine two types into one type.</li>
+<li><code>type status = 'active' | 'inactive'</code>: can be used like enum to define restricted values.
 <ul>
-<li>RxJava &amp; RxAndroid(To be continued later)
-<ul>
-<li><a href="rx/rx1.html">lesson 1</a></li>
-<li><a href="rx/rx2.html">lesson 2</a></li>
+<li>Note: we can use <code>|</code> directly like <code>function print(a: string | number)</code></li>
 </ul>
 </li>
 </ul>
-<h2 id="coursers-documentation--notes">Coursers Documentation &amp; Notes.</h2>
+<h1 id="typeof">typeof</h1>
 <ul>
-<li>
-<p>typescript essential training <a href="https://www.linkedin.com/learning/typescript-essential-training-14687057">LinkedIn</a></p>
-<ul>
-<li><a href="courses/typescript.html">Notes</a></li>
-</ul>
-</li>
-<li>
-<p>Android Apps with Kotlin: Tools and Testing <a href="https://app.pluralsight.com/library/courses/android-apps-kotlin-tools-testing/table-of-contents">Plurashight</a></p>
-<ul>
-<li><a href="courses/KoltinAndoridTest.html">Notes</a></li>
-</ul>
-</li>
-<li>
-<p>Android Apps with Kotlin: ViewModel and Lifecycle <a href="%5Bsasasasasasa%5D(https://app.pluralsight.com/library/courses/android-apps-kotlin-viewmodel-lifecycle/table-of-contents)">Plurashight</a></p>
-<ul>
-<li><a href="ViewModel.html">Notes</a></li>
-</ul>
-</li>
-<li>
-<p>Kotlin Essential Training <a href="https://www.lynda.com/Software-Development-tutorials/Kotlin-Essential-Training/661774-2.html">Lynda</a></p>
-<ul>
-<li><a href="courses/kotlin.html">Docs</a></li>
-</ul>
-</li>
-<li>
-<p>Java Testing with JUnit <a href="https://www.lynda.com/Java-tutorials/Using-JUnit-Testing-Java/520534-2.html">Lynda</a></p>
-<ul>
-<li><a href="courses/JUnit.html">Docs</a></li>
-</ul>
-</li>
-</ul>
-<h2 id="apps">Apps</h2>
-<ul>
-<li><a href="https://github.com/MahmoudMabrok/QuranyApp">HollyQuran</a></li>
-<li><a href="https://github.com/MahmoudMabrok/Quizzy_app">QuizzyApp</a></li>
-<li><a href="https://play.google.com/store/apps/details?id=com.mahmoudmabrok.kartony">Kartoony</a></li>
-<li><a href="https://play.google.com/store/apps/details?id=com.mahmoudmabrok.hadibadi">HadiBadi</a></li>
-<li><a href="https://play.google.com/store/apps/details?id=education.mahmoud.xo">TicTacToi</a></li>
-<li><a href="https://play.google.com/store/apps/details?id=com.mahmoudmabrok.azakri">Azkari</a></li>
-<li><a href="https://play.google.com/store/apps/details?id=learnkotlin.mahmoud.numberfighter">TimeFighter</a></li>
-<li><a href="https://play.google.com/store/apps/details?id=education.mahmoud.playnumbers">Play With Numbers</a></li>
-</ul>
-<h2 id="contacts--personal-data">Contacts &amp; personal Data</h2>
-<ul>
-<li><strong>Email:-</strong>  mahmoudmabrok3579@gmail.com</li>
-<li><a href="http://bit.ly/2Ja1RyX">My CV</a></li>
-<li><a href="https://www.linkedin.com/in/mahmoud-mabrouk-fouad-41a318b3/">Linkedin</a></li>
-<li><a href="https://www.youtube.com/channel/UCj6g2CVt-AmattZH1ESa1rg">Youtube</a></li>
-<li><a href="https://github.com/MahmoudMabrok">Github</a></li>
-</ul>
+<li>used to retrive type of object/field like <code> if (typeof contact.birthDate === &quot;number&quot;)</code></li>
+<li>can be used to define a new type without need an interface:<pre class="hljs"><code><div>    <span class="hljs-keyword">const</span> user = {name:<span class="hljs-string">"mahmoud"</span> , age:<span class="hljs-number">15</span>}; 
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">printUser</span>(<span class="hljs-params">params: <span class="hljs-keyword">typeof</span> user</span>) </span>{
+        
+    }
+    <span class="hljs-comment">// note: typeof can not be used with type like User, Contact it needs actual object/value.</span>
 
+</div></code></pre>
+</li>
+</ul>
+<h1 id="keyof">keyof</h1>
+<p>retrive properties/keys as union like <code>type title = keyof User</code> so it can be used later with something like indexed access types.</p>
+<h1 id="indexed-access-types">indexed access types</h1>
+<p>Get type by access property like:</p>
+<pre class="hljs"><code><div>{
+ contactId: Contact[<span class="hljs-string">"id"</span>]; 
+}
+</div></code></pre>
+<p><code>contactId</code> here will be of type same as property &quot;id&quot; of <code>Contact</code>.</p>
+<h1 id="using-record">using Record</h1>
+<ul>
+<li>Record used to define a type with dynamic values and types.</li>
+<li>It need possible property <strong>values</strong> &amp; possible property <strong>types</strong>.</li>
+<li>Let's have a sample</li>
+</ul>
+<h1 id="modules">Modules</h1>
+<ul>
+<li>
+<p>In JS we can use modules to organize our code and export what we need then import it where needed.</p>
+<ul>
+<li>
+<p>for exporting</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// let say file name is util.js</span>
+<span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">doSomeThing</span>(<span class="hljs-params"></span>)</span>{
 
-<a href="https://info.flagcounter.com/RfzR"><img src="https://s01.flagcounter.com/countxl/RfzR/bg_FFFFFF/txt_000000/border_CCCCCC/columns_3/maxflags_12/viewers_0/labels_1/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0"></a>
+}
+</div></code></pre>
+</li>
+<li>
+<p>for importing</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// let say file name is app.js</span>
+<span class="hljs-keyword">import</span> { doSomeThing } <span class="hljs-keyword">from</span> <span class="hljs-string">"./util.js"</span>
 
+doSomeThing(); 
+</div></code></pre>
+</li>
+<li>
+<p>when use it in browser we will need only reference <code>app.js</code>:</p>
+<pre class="hljs"><code><div>&lt;script type=<span class="hljs-string">"module"</span>  src=<span class="hljs-string">"app.js"</span>&gt;&lt;<span class="hljs-regexp">/script&gt;
+</span></div></code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p>you can define <code>global.d.ts</code> to define methods you want to export between modules and get support of typescript [this only make definition for exported methods]</p>
+<ul>
+<li>code</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">declare</span> global {
+    <span class="hljs-comment">// that doSomeThing</span>
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">dodoSomeThing</span>(<span class="hljs-params"></span>):<span class="hljs-title">string</span> 
+
+} 
+
+<span class="hljs-title">export</span> </span>{} 
+
+</div></code></pre>
+<ul>
+<li>this will not make code avaiable at runtime of web page, you will need to <strong>add</strong> both files.</li>
+</ul>
+</li>
+</ul>
+<h2 id="declaration-merging">Declaration merging</h2>
+<ul>
+<li>It is a feature that allow you to add more methods and property to existing classes or external classes.</li>
+<li>Steps
+<ul>
+<li>just declar interface with same name and define inside it what you need</li>
+</ul>
+<pre class="hljs"><code><div>    <span class="hljs-keyword">class</span> Customer{
+
+    }
+
+    <span class="hljs-keyword">interface</span> Customer {
+        save():<span class="hljs-built_in">void</span>
+    }
+
+    <span class="hljs-keyword">const</span> customer = <span class="hljs-keyword">new</span> Customer();
+    customer.save = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
+        <span class="hljs-comment">// do what yuo want</span>
+    }        
+
+</div></code></pre>
+<ul>
+<li>here ts jsut <strong>merge</strong> two declarions.</li>
+</ul>
+</li>
+<li>can be used to add <strong>property</strong> to <strong>window</strong> object which we do not own, this can be done by having <code>global.d.ts</code> that have interface with name <code>Window</code> then add what you want.<pre class="hljs"><code><div><span class="hljs-keyword">declare</span> global {
+    
+    <span class="hljs-keyword">interface</span> Window {
+        <span class="hljs-comment">// value of something</span>
+        myValue:<span class="hljs-built_in">string</span> 
+    }
+
+} 
+
+<span class="hljs-keyword">export</span> {} 
+
+</div></code></pre>
+</li>
+</ul>
+<h2 id="running-it">Running it</h2>
+<ul>
+<li>
+<p>to use exports with ts you will need to add <code>&quot;module&quot;: &quot;CommonJS&quot;</code> to <code>compilerOptions</code> this for node application</p>
+</li>
+<li>
+<p>for web app you will need to use bundle apps like <code>webpack</code>, <code>parcel</code>.</p>
+</li>
+</ul>
 
 </body>
 </html>

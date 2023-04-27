@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>react.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="table-of-content">Table of content</h1>
+<ul>
+<li><a href="#useeffect">useEffect</a>
+<ul>
+<li><a href="#intro">intro</a></li>
+<li><a href="#it-has-3-parts">it has 3 parts:</a></li>
+<li><a href="#use-cases">use cases:</a></li>
+</ul>
+</li>
+<li><a href="#usereducer">useReducer()</a>
+<ul>
+<li><a href="#intro-1">intro</a></li>
+<li><a href="#parts">parts</a></li>
+<li><a href="#use">use</a></li>
+</ul>
+</li>
+<li><a href="#context-api">Context API</a>
+<ul>
+<li><a href="#intro-2">intro</a></li>
+<li><a href="#creating-it">creating it</a></li>
+<li><a href="#using-it">using it</a></li>
+<li><a href="#advanced-use">advanced use</a></li>
+<li><a href="#cons">Cons</a></li>
+</ul>
+</li>
+<li><a href="#class-based-componenets">Class based componenets</a>
+<ul>
+<li><a href="#use-cases">use cases</a></li>
+<li><a href="#use">Use</a></li>
+<li><a href="#error-boundary">Error Boundary</a></li>
+<li><a href="#use-context">use context</a></li>
+</ul>
+</li>
+<li><a href="#redux">Redux</a>
+<ul>
+<li><a href="#intro-3">intro</a></li>
+<li><a href="#use-1">use</a></li>
+<li><a href="#use-toolkilt">use toolkilt</a>
+<ul>
+<li><a href="#installing">installing</a></li>
+<li><a href="#single-slic-simple-actions">single slic, simple actions</a></li>
+<li><a href="#multiple-slic">multiple slic</a></li>
+<li><a href="#using-tunks-to-add-async-to-actions">using tunks to add async to actions.</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#authentication">Authentication</a>
+<ul>
+<li><a href="#intro-4">intro</a></li>
+<li><a href="#samples">samples</a></li>
+</ul>
+</li>
+<li><a href="#deployement">Deployement</a>
+<ul>
+<li><a href="#lazy-loading">lazy loading</a></li>
+<li><a href="#client-vs-server-routing">client vs server routing</a></li>
+</ul>
+</li>
+<li><a href="#animation">Animation</a>
+<ul>
+<li><a href="#using-css">using css</a></li>
+<li><a href="#use-react-transition-group">use react-transition-group</a>
+<ul>
+<li><a href="#why-we-need-it">why we need it?</a></li>
+<li><a href="#use-1">Use</a></li>
+<li><a href="#use-csstransition">Use CSSTransition</a></li>
+<li><a href="#transitiongroup">TransitionGroup</a></li>
+<li><a href="#other-libs">Other libs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#testing">Testing</a>
+<ul>
+<li><a href="#defining-suit-and-first-test">defining suit and first test</a></li>
+<li><a href="#adding-mocks">adding mocks</a></li>
+</ul>
+</li>
+<li><a href="#react--typescript">React &amp; TypeScript</a>
+<ul>
+<li><a href="#basics">Basics</a></li>
+<li><a href="#react">React</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="useeffect">useEffect</h1>
+<h2 id="intro">intro</h2>
+<ul>
+<li>as js functions are pure functions, some times we need to add some side effects thta change outer environment.
+how to use:</li>
+</ul>
+<pre class="hljs"><code><div> useEffect(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+    <span class="hljs-keyword">const</span> timer = setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+      <span class="hljs-comment">// change</span>
+    }, <span class="hljs-number">1500</span>);
+    <span class="hljs-keyword">return</span> clearTimer(timer);
+  }, [text]);
+</div></code></pre>
+<h2 id="it-has-3-parts">it has 3 parts:</h2>
+<ul>
+<li><strong>function</strong> to execute.</li>
+<li><strong>clear function</strong> that runs (before next trigger of function, after removing of component).</li>
+<li><strong>dependency list</strong>: contains list of dep that effect will trigger function with every change of their values, have 3 cases:
+<ul>
+<li>empty: will trigger function every time component is rendered.</li>
+<li>[]: trigger once first render.</li>
+<li>[text, etc]: with every change in the list values.</li>
+</ul>
+</li>
+</ul>
+<h2 id="use-cases">use cases:</h2>
+<ul>
+<li>trigger fetch data from web</li>
+<li>trigger animations based on changes in the component's state</li>
+</ul>
+<hr>
+<h1 id="usereducer">useReducer()</h1>
+<h2 id="intro">intro</h2>
+<ul>
+<li>have related states.</li>
+<li>need more power.</li>
+</ul>
+<h2 id="parts">parts</h2>
+<p>reducer function that take old state and action then return new state.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">const</span> countReducer = <span class="hljs-function">(<span class="hljs-params">prevState , action</span>) =&gt;</span> {
+    <span class="hljs-keyword">switch</span>(action.type){
+        <span class="hljs-keyword">case</span> INC: 
+        <span class="hljs-keyword">return</span> {<span class="hljs-attr">value</span>: prevState.value + <span class="hljs-number">1</span> }; 
+
+        <span class="hljs-keyword">case</span> DEC: 
+        <span class="hljs-keyword">return</span> {<span class="hljs-attr">value</span>: prevState.value - <span class="hljs-number">1</span> };
+
+        <span class="hljs-keyword">case</span> CLEAR: 
+        <span class="hljs-keyword">return</span> {<span class="hljs-attr">value</span>: <span class="hljs-number">0</span> };
+    }
+
+    <span class="hljs-keyword">return</span> { <span class="hljs-attr">value</span>: <span class="hljs-number">0</span>};
+}
+</div></code></pre>
+<h2 id="use">use</h2>
+<pre class="hljs"><code><div>  <span class="hljs-keyword">const</span> [count, countDispatch] = useReducer(countReducer , {<span class="hljs-attr">value</span>: <span class="hljs-number">0</span>});
+
+</div></code></pre>
+<p><code>countDispatch</code> used to send action to reducer function:</p>
+<pre class="hljs"><code><div> countDispatch({<span class="hljs-attr">type</span>: INC});
+</div></code></pre>
+<hr>
+<h1 id="context-api">Context API</h1>
+<h2 id="intro">intro</h2>
+<p>it is for state managment for component and accros app.
+We create store file with context.
+it hold object.</p>
+<h2 id="creating-it">creating it</h2>
+<pre class="hljs"><code><div><span class="hljs-keyword">const</span> AuthContext = React.createContext({
+  <span class="hljs-attr">isLoggedIn</span>: <span class="hljs-literal">false</span>
+});
+</div></code></pre>
+<h2 id="using-it">using it</h2>
+<p>the use by hook.</p>
+<pre class="hljs"><code><div> <span class="hljs-keyword">const</span> ctx = useContext(AuthContext);
+ ctx.isLoggedIn <span class="hljs-comment">// get the value.</span>
+</div></code></pre>
+<p>will need <code>AuthContext.Provider</code> to wrap component that will use context,</p>
+<pre class="hljs"><code><div>  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">AuthContext.Provider</span>
+      <span class="hljs-attr">value</span>=<span class="hljs-string">{{</span>
+        <span class="hljs-attr">isLoggedIn:</span> <span class="hljs-attr">isLoggedIn</span>,
+        <span class="hljs-attr">onLogout:</span> <span class="hljs-attr">logoutHandler</span>,
+        <span class="hljs-attr">onLogin:</span> <span class="hljs-attr">loginHandler</span>,
+      }}
+    &gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">App</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">AuthContext.Provider</span>&gt;</span></span>
+  );
+};
+</div></code></pre>
+<h2 id="advanced-use">advanced use</h2>
+<p>it is advised to be like:</p>
+<pre class="hljs"><code><div>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> AuthContextProvider = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> [isLoggedIn, setIsLoggedIn] = useState(<span class="hljs-literal">false</span>);
+
+  useEffect(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+    <span class="hljs-keyword">const</span> storedUserLoggedInInformation = localStorage.getItem(<span class="hljs-string">'isLoggedIn'</span>);
+
+    <span class="hljs-keyword">if</span> (storedUserLoggedInInformation === <span class="hljs-string">'1'</span>) {
+      setIsLoggedIn(<span class="hljs-literal">true</span>);
+    }
+  }, []);
+
+  <span class="hljs-keyword">const</span> logoutHandler = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+    localStorage.removeItem(<span class="hljs-string">'isLoggedIn'</span>);
+    setIsLoggedIn(<span class="hljs-literal">false</span>);
+  };
+
+  <span class="hljs-keyword">const</span> loginHandler = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+    localStorage.setItem(<span class="hljs-string">'isLoggedIn'</span>, <span class="hljs-string">'1'</span>);
+    setIsLoggedIn(<span class="hljs-literal">true</span>);
+  };
+
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">AuthContext.Provider</span>
+      <span class="hljs-attr">value</span>=<span class="hljs-string">{{</span>
+        <span class="hljs-attr">isLoggedIn:</span> <span class="hljs-attr">isLoggedIn</span>,
+        <span class="hljs-attr">onLogout:</span> <span class="hljs-attr">logoutHandler</span>,
+        <span class="hljs-attr">onLogin:</span> <span class="hljs-attr">loginHandler</span>,
+      }}
+    &gt;</span>
+      {props.children}
+    <span class="hljs-tag">&lt;/<span class="hljs-name">AuthContext.Provider</span>&gt;</span></span>
+  );
+};
+</div></code></pre>
+<h2 id="cons">Cons</h2>
+<ul>
+<li>not good for high frequent changes.</li>
+<li>may lead to nested context wrapper/provider.</li>
+</ul>
+<hr>
+<h1 id="class-based-componenets">Class based componenets</h1>
+<h2 id="use-cases">use cases</h2>
+<ul>
+<li>need to use Error boundary.</li>
+</ul>
+<h2 id="use">Use</h2>
+<p>will use <code>this</code> to access <code>props</code>.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+
+<span class="hljs-keyword">import</span> classes <span class="hljs-keyword">from</span> <span class="hljs-string">'./User.module.css'</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+    <span class="hljs-keyword">constructor</span>() {
+    <span class="hljs-keyword">super</span>(); <span class="hljs-comment">// must call it</span>
+    <span class="hljs-keyword">this</span>.state = {
+      <span class="hljs-attr">filteredUsers</span>: [],
+      <span class="hljs-attr">searchTerm</span>: <span class="hljs-string">''</span>,
+    };
+  }
+
+  <span class="hljs-comment">// Called after a component is mounted</span>
+  componentDidMount() {
+    <span class="hljs-comment">// this is the way we update state</span>
+    <span class="hljs-keyword">this</span>.setState({ <span class="hljs-attr">filteredUsers</span>: <span class="hljs-keyword">this</span>.context.users });
+  }
+
+  <span class="hljs-comment">// when component re-evaluted </span>
+  componentDidUpdate(prevProps, prevState) {
+    <span class="hljs-keyword">if</span> (prevState.searchTerm !== <span class="hljs-keyword">this</span>.state.searchTerm) {
+      <span class="hljs-keyword">this</span>.setState({
+        <span class="hljs-attr">filteredUsers</span>: <span class="hljs-keyword">this</span>.context.users.filter(<span class="hljs-function">(<span class="hljs-params">user</span>) =&gt;</span>
+          user.name.includes(<span class="hljs-keyword">this</span>.state.searchTerm)
+        ),
+      });
+    }
+  }
+  
+  <span class="hljs-comment">// ummounted from screen.</span>
+  componentWillUnmount() {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'User will unmount!'</span>);
+  }
+
+
+  render() {
+    <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{classes.user}</span>&gt;</span>{this.props.name}<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span>;
+  } 
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> User;
+
+</div></code></pre>
+<h2 id="error-boundary">Error Boundary</h2>
+<ul>
+<li>simply create a new compoent</li>
+<li>use <code>componentDidCatch</code> to get notfified when error occured.</li>
+<li>then wrap that componet to any other compoent expected to throw error.</li>
+</ul>
+<p>code:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ErrorBoundary</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+  <span class="hljs-keyword">constructor</span>() {
+    <span class="hljs-keyword">super</span>();
+    <span class="hljs-keyword">this</span>.state = { <span class="hljs-attr">hasError</span>: <span class="hljs-literal">false</span> };
+  }
+
+  <span class="hljs-comment">// Catches exceptions generated in descendant components.</span>
+  componentDidCatch(error) {
+    <span class="hljs-built_in">console</span>.log(error);
+    <span class="hljs-keyword">this</span>.setState({ <span class="hljs-attr">hasError</span>: <span class="hljs-literal">true</span> });
+  }
+
+  render() {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.state.hasError) {
+      <span class="hljs-keyword">return</span> <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Something went wrong!<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span>;
+    }
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.props.children;
+  }
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> ErrorBoundary;
+
+</div></code></pre>
+<h2 id="use-context">use context</h2>
+<p>define <code>contextType</code> and assign it to context.
+it is allowed only one context to be used.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">static</span> contextType = UsersContext;
+</div></code></pre>
+<hr>
+<h1 id="redux">Redux</h1>
+<h2 id="intro">intro</h2>
+<ul>
+<li>it create a store and uses reducer function to generate new states.</li>
+<li>no direct update to state, but dispatch actions to reducer function</li>
+<li>then redux will publish it to its subscriber.</li>
+<li>sending updates starts when component dispatch actions.</li>
+</ul>
+<h2 id="use">use</h2>
+<p>add it to project.
+<code> npm install redux react-redux</code></p>
+<p>create store at a new folder.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> { createStore } <span class="hljs-keyword">from</span> <span class="hljs-string">'redux'</span>;
+
+<span class="hljs-keyword">const</span> counterReducer = <span class="hljs-function">(<span class="hljs-params">state = { counter: <span class="hljs-number">0</span> }, action</span>) =&gt;</span> {
+  <span class="hljs-keyword">if</span> (action.type === <span class="hljs-string">'increment'</span>) {
+    <span class="hljs-keyword">return</span> {
+      <span class="hljs-attr">counter</span>: state.counter + <span class="hljs-number">1</span>,
+    };
+  }
+
+  <span class="hljs-keyword">if</span> (action.type === <span class="hljs-string">'decrement'</span>) {
+    <span class="hljs-keyword">return</span> {
+      <span class="hljs-attr">counter</span>: state.counter - <span class="hljs-number">1</span>,
+    };
+  }
+
+  <span class="hljs-keyword">return</span> state;
+};
+
+<span class="hljs-keyword">const</span> store = createStore(counterReducer);
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> store;
+
+</div></code></pre>
+<p>then wrap <code>App</code> or root component.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> Provider <span class="hljs-keyword">from</span> <span class="hljs-string">"react-redux"</span>;
+
+root.render(
+  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Provider</span> <span class="hljs-attr">store</span>=<span class="hljs-string">{appStore}</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">App</span> /&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">Provider</span>&gt;</span></span>
+);
+
+</div></code></pre>
+<p>to get the state and its data, we use <strong>selector</strong> to define which part is important for us for watching.</p>
+<pre class="hljs"><code><div>  <span class="hljs-comment">// state: represent the whole store state.</span>
+  <span class="hljs-keyword">const</span> value = useSelector(<span class="hljs-function"><span class="hljs-params">state</span> =&gt;</span> state.value);
+</div></code></pre>
+<p>to send actions, we get the dispatcher by:</p>
+<pre class="hljs"><code><div> <span class="hljs-keyword">const</span> dispatch = useDispatch();
+
+ <span class="hljs-comment">// then use it </span>
+dispatch({ <span class="hljs-attr">type</span>: <span class="hljs-string">'decrement'</span> }); <span class="hljs-comment">// you can add any data to action and use it at reducer</span>
+</div></code></pre>
+<p>for class based components, u will need some mapping</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> {connect} <span class="hljs-keyword">from</span> <span class="hljs-string">'react-redux'</span>
+
+<span class="hljs-comment">// at handler call `this.props.increment();`</span>
+<span class="hljs-comment">// to get data call `this.props.counter`</span>
+
+
+<span class="hljs-keyword">const</span> mapStateToProps = <span class="hljs-function"><span class="hljs-params">state</span> =&gt;</span> {
+  <span class="hljs-keyword">return</span> {
+    <span class="hljs-attr">counter</span>: state.counter
+  };
+}
+
+<span class="hljs-keyword">const</span> mapDispatchToProps = <span class="hljs-function"><span class="hljs-params">dispatch</span> =&gt;</span> {
+  <span class="hljs-keyword">return</span> {
+    <span class="hljs-attr">increment</span>: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> dispatch({ <span class="hljs-attr">type</span>: <span class="hljs-string">'increment'</span> }),
+    <span class="hljs-attr">decrement</span>: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> dispatch({ <span class="hljs-attr">type</span>: <span class="hljs-string">'decrement'</span> }),
+  }
+};
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> connect(mapStateToProps, mapDispatchToProps)(Counter);
+
+</div></code></pre>
+<p><strong>NOTE</strong>: new object from <strong>reducer</strong> is <strong>overrdiing</strong> old state not merging it, i.e if miss a value, it will be earsed.</p>
+<h2 id="use-toolkilt">use toolkilt</h2>
+<h3 id="installing">installing</h3>
+<p><code>npm install @reduxjs/toolkit</code></p>
+<h3 id="single-slic-simple-actions">single slic, simple actions</h3>
+<p>slic contains a seperated state and its actions.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> { createSlice, configureStore } <span class="hljs-keyword">from</span> <span class="hljs-string">'@reduxjs/toolkit'</span>;
+
+<span class="hljs-keyword">const</span> initialState = { <span class="hljs-attr">counter</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">showCounter</span>: <span class="hljs-literal">true</span> };
+
+<span class="hljs-keyword">const</span> counterSlice = createSlice({
+  <span class="hljs-attr">name</span>: <span class="hljs-string">'counter'</span>,
+  initialState,
+  <span class="hljs-attr">reducers</span>: {
+    increment(state) {
+      state.counter++;
+    },
+    decrement(state) {
+      state.counter--;
+    },
+    increase(state, action) {
+      state.counter = state.counter + action.payload;
+    },
+    toggleCounter(state) {
+      state.showCounter = !state.showCounter;
+    }
+  }
+});
+
+<span class="hljs-keyword">const</span> store = configureStore({
+  <span class="hljs-attr">reducer</span>: counterSlice.reducer
+});
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> counterActions = counterSlice.actions;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> store;
+
+</div></code></pre>
+<p>NOTES:</p>
+<ul>
+<li><code>state.counter--;</code> not mutate old state but toolkit use a library to create a merged version for us.</li>
+<li><code>action.payload</code> extra data sent with action will be stored here.</li>
+</ul>
+<p><strong>instead</strong> of having actions <code>hard coder</code>, now call it as function that will return the hard coded one.</p>
+<pre class="hljs"><code><div>dispatch(counterActions.increment()); <span class="hljs-comment">// counterActions exported before from slic using `slic.actions`.</span>
+</div></code></pre>
+<h3 id="multiple-slic">multiple slic</h3>
+<p>create slices then merge them to be one reducer</p>
+<pre class="hljs"><code><div>
+<span class="hljs-keyword">const</span> store = configureStore({
+  <span class="hljs-attr">reducer</span>: {<span class="hljs-attr">counter</span>:counterSlice.reducer , <span class="hljs-attr">auth</span>:authSlice.reducer}
+});
+
+</div></code></pre>
+<p>when calling it at <code>useSelector</code> use its name as example counter:</p>
+<pre class="hljs"><code><div> <span class="hljs-keyword">const</span> counter = useSelector(<span class="hljs-function">(<span class="hljs-params">state</span>) =&gt;</span> state.auth.isLogged);
+</div></code></pre>
+<h3 id="using-tunks-to-add-async-to-actions">using tunks to add async to actions.</h3>
+<p><strong>tunk</strong>: is function that return a function that being delayed.
+normal action creator return action like <code>{type: 'inc', payload:5}</code>
+let see in action.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> sendCartData = <span class="hljs-function">(<span class="hljs-params">cart</span>) =&gt;</span> {
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">async</span> (dispatch) =&gt; {
+    dispatch(
+      uiActions.showNotification({
+        <span class="hljs-attr">status</span>: <span class="hljs-string">'pending'</span>,
+        <span class="hljs-attr">title</span>: <span class="hljs-string">'Sending...'</span>,
+        <span class="hljs-attr">message</span>: <span class="hljs-string">'Sending cart data!'</span>,
+      })
+    );
+
+    <span class="hljs-keyword">const</span> sendRequest = <span class="hljs-keyword">async</span> () =&gt; {
+      <span class="hljs-keyword">const</span> response = <span class="hljs-keyword">await</span> fetch(
+        <span class="hljs-string">'https://react-http-6b4a6.firebaseio.com/cart.json'</span>,
+        {
+          <span class="hljs-attr">method</span>: <span class="hljs-string">'PUT'</span>,
+          <span class="hljs-attr">body</span>: <span class="hljs-built_in">JSON</span>.stringify({
+            <span class="hljs-attr">items</span>: cart.items,
+            <span class="hljs-attr">totalQuantity</span>: cart.totalQuantity,
+          }),
+        }
+      );
+
+      <span class="hljs-keyword">if</span> (!response.ok) {
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'Sending cart data failed.'</span>);
+      }
+    };
+
+    <span class="hljs-keyword">try</span> {
+      <span class="hljs-keyword">await</span> sendRequest();
+
+      dispatch(
+        uiActions.showNotification({
+          <span class="hljs-attr">status</span>: <span class="hljs-string">'success'</span>,
+          <span class="hljs-attr">title</span>: <span class="hljs-string">'Success!'</span>,
+          <span class="hljs-attr">message</span>: <span class="hljs-string">'Sent cart data successfully!'</span>,
+        })
+      );
+    } <span class="hljs-keyword">catch</span> (error) {
+      dispatch(
+        uiActions.showNotification({
+          <span class="hljs-attr">status</span>: <span class="hljs-string">'error'</span>,
+          <span class="hljs-attr">title</span>: <span class="hljs-string">'Error!'</span>,
+          <span class="hljs-attr">message</span>: <span class="hljs-string">'Sending cart data failed!'</span>,
+        })
+      );
+    }
+  };
+};
+
+</div></code></pre>
+<p>NOTES:</p>
+<ul>
+<li>we can safely makr function async <code>return async (dispatch)</code>.</li>
+<li>we will have <code>(dispatch)</code> that can be used to dispatch other actions</li>
+</ul>
+<p>the use: is like normal actions,
+<code>dispatch(sendCartData(cart))</code></p>
+<hr>
+<h1 id="authentication">Authentication</h1>
+<h2 id="intro">intro</h2>
+<ul>
+<li>we can use two ways to add authentication to our app
+<ul>
+<li>server side sessions: server map user id to map of valid ones, and we send id with each request</li>
+<li>auth token: token generated by server and being checked with each request.</li>
+</ul>
+</li>
+<li>we Can add <code>loader</code> to main root, inwhich we will return auth data to be avaiable to all subroutes.</li>
+<li>we Can use <code>action</code> to redirect user to home/auth screen after submit logout.</li>
+<li>we can use <code>useSearchParams()</code> to get search params in current active page.</li>
+</ul>
+<h2 id="samples">samples</h2>
+<p>logout action will be used with route of logout,</p>
+<pre class="hljs"><code><div>      {
+        <span class="hljs-attr">path</span>: <span class="hljs-string">'logout'</span>,
+        <span class="hljs-attr">action</span>: logoutAction,
+      },
+</div></code></pre>
+<pre class="hljs"><code><div><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">action</span>(<span class="hljs-params"></span>) </span>{
+  localStorage.removeItem(<span class="hljs-string">'token'</span>);
+  <span class="hljs-keyword">return</span> redirect(<span class="hljs-string">'/'</span>);
+}
+</div></code></pre>
+<p>logout button, when clicked a <strong>form</strong> will <code>submit</code> a <strong>post request</strong> to action of <code>logout</code> route</p>
+<pre class="hljs"><code><div>            &lt;Form action=<span class="hljs-string">"/logout"</span> method=<span class="hljs-string">"post"</span>&gt;
+              <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span>&gt;</span>Logout<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>
+            &lt;<span class="hljs-regexp">/Form&gt;
+</span></div></code></pre>
+<p>at action of <strong>login form</strong> we can get params by:</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">export</span> <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">action</span>(<span class="hljs-params">{ request }</span>) </span>{
+  <span class="hljs-keyword">const</span> searchParams = <span class="hljs-keyword">new</span> URL(request.url).searchParams;
+  <span class="hljs-keyword">const</span> mode = searchParams.get(<span class="hljs-string">'mode'</span>) || <span class="hljs-string">'login'</span>;
+.....
+return redirect(<span class="hljs-string">'/'</span>); <span class="hljs-comment">// return to home page.</span>
+}
+</div></code></pre>
+<hr>
+<h1 id="deployement">Deployement</h1>
+<h2 id="lazy-loading">lazy loading</h2>
+<p>for component</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">const</span> BlogPage = lazy( <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> <span class="hljs-keyword">import</span>(<span class="hljs-string">'./pages/BlogPage'</span>) );
+element: (
+              <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Suspense</span> <span class="hljs-attr">fallback</span>=<span class="hljs-string">{</span>&lt;<span class="hljs-attr">p</span>&gt;</span>Loading...<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>}&gt;
+                <span class="hljs-tag">&lt;<span class="hljs-name">BlogPage</span> /&gt;</span>
+              <span class="hljs-tag">&lt;/<span class="hljs-name">Suspense</span>&gt;</span></span>
+            ),
+</div></code></pre>
+<hr>
+<p>for loader</p>
+<pre class="hljs"><code><div>          {
+            <span class="hljs-attr">index</span>: <span class="hljs-literal">true</span>,
+            <span class="hljs-attr">element</span>: (
+              <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Suspense</span> <span class="hljs-attr">fallback</span>=<span class="hljs-string">{</span>&lt;<span class="hljs-attr">p</span>&gt;</span>Loading...<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>}&gt;
+                <span class="hljs-tag">&lt;<span class="hljs-name">BlogPage</span> /&gt;</span>
+              <span class="hljs-tag">&lt;/<span class="hljs-name">Suspense</span>&gt;</span></span>
+            ),
+            <span class="hljs-attr">loader</span>: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span>
+              <span class="hljs-keyword">import</span>(<span class="hljs-string">'./pages/Blog'</span>).then(<span class="hljs-function">(<span class="hljs-params"><span class="hljs-built_in">module</span></span>) =&gt;</span> <span class="hljs-built_in">module</span>.loader()),
+          },
+
+</div></code></pre>
+<h2 id="client-vs-server-routing">client vs server routing</h2>
+<p>as we now React, is single page which means only one page is loaded from server then React do routing
+so we must configure our server to treat it as single page, on firebase it do this easily.</p>
+<hr>
+<h1 id="animation">Animation</h1>
+<h2 id="using-css">using css</h2>
+<p>we can use transition and keyframes to add animation.
+At first, we should add <code>transition</code> to enable it</p>
+<pre class="hljs"><code><div><span class="hljs-selector-class">.Model</span> {
+   <span class="hljs-attribute">transition</span>: all <span class="hljs-number">0.3s</span> ease-out;
+}
+</div></code></pre>
+<ul>
+<li><code>all</code>: specify all properties will be transitioned, we can specify opacity as sample</li>
+<li><code>0.3s</code> time of transition</li>
+<li><code>ease-out</code>: interprolation method [how transition will be done].
+then we can use key frames like next</li>
+</ul>
+<pre class="hljs"><code><div>
+<span class="hljs-selector-class">.ModalOpen</span> {
+    <span class="hljs-attribute">animation</span>: openModal <span class="hljs-number">0.4s</span> ease-out forwards;
+}
+
+<span class="hljs-selector-class">.ModalClosed</span> {
+    <span class="hljs-attribute">animation</span>: closeModal <span class="hljs-number">0.4s</span> ease-out forwards;
+}
+
+<span class="hljs-keyword">@keyframes</span> openModal {
+    0% {
+        <span class="hljs-attribute">opacity</span>: <span class="hljs-number">0</span>;
+        <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translateY</span>(-<span class="hljs-number">100%</span>);
+    }
+    50% {
+        <span class="hljs-attribute">opacity</span>: <span class="hljs-number">1</span>;
+        <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translateY</span>(<span class="hljs-number">90%</span>);
+    }
+    100% {
+        <span class="hljs-attribute">opacity</span>: <span class="hljs-number">1</span>;
+        <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translateY</span>(<span class="hljs-number">0</span>);
+    }
+}
+
+<span class="hljs-keyword">@keyframes</span> closeModal {
+    0% {
+        <span class="hljs-attribute">opacity</span>: <span class="hljs-number">1</span>;
+        <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translateY</span>(<span class="hljs-number">0</span>);
+    }
+    50% {
+        <span class="hljs-attribute">opacity</span>: <span class="hljs-number">0.8</span>;
+        <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translateY</span>(<span class="hljs-number">60%</span>);
+    }
+    100% {
+        <span class="hljs-attribute">opacity</span>: <span class="hljs-number">0</span>;
+        <span class="hljs-attribute">transform</span>: <span class="hljs-built_in">translateY</span>(-<span class="hljs-number">100%</span>);
+    }
+}
+
+</div></code></pre>
+<ul>
+<li>use <code>animation</code> to define the transition key frames with timing and function.</li>
+<li>with <code>keyframes</code> we specify different <strong>values</strong> based on current <strong>progress</strong> of transition.</li>
+</ul>
+<p>then at code, we add class based on state.</p>
+<pre class="hljs"><code><div>
+<span class="hljs-keyword">const</span> modal = <span class="hljs-function"><span class="hljs-params">props</span> =&gt;</span> {
+  <span class="hljs-keyword">const</span> cssClasses = [
+    <span class="hljs-string">"Modal"</span>,
+    props.show ? <span class="hljs-string">"ModalOpen"</span> : <span class="hljs-string">"ModalClosed"</span>
+  ];
+
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{cssClasses.join(</span>' ')}&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>A Modal<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"Button"</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{props.closed}</span>&gt;</span>
+        Dismiss
+      <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+  );
+};
+</div></code></pre>
+<h2 id="use-react-transition-group">use react-transition-group</h2>
+<h3 id="why-we-need-it">why we need it?</h3>
+<p>it fix the lack of css transition which when compoent is being unmounted from screen it may cut the animation i.e not run that animation properly as compoent is leaving the screen which may lead to a bad UX.</p>
+<h3 id="use">Use</h3>
+<p>at first install it, <code>npm install react-transition-group</code>
+for normal compoent, we will use <code>Transition</code>,</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> Transition <span class="hljs-keyword">from</span> <span class="hljs-string">"react-transition-group/Transition"</span>;
+</div></code></pre>
+<p>wrap it to what you need to transition</p>
+<pre class="hljs"><code><div>  &lt;Transition 
+          <span class="hljs-keyword">in</span>={<span class="hljs-keyword">this</span>.state.showBlock} 
+          timeout={<span class="hljs-number">1000</span>}
+          mountOnEnter
+          unmountOnExit&gt;
+          {state =&gt; (
+            <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>
+              <span class="hljs-attr">style</span>=<span class="hljs-string">{{</span>
+                <span class="hljs-attr">backgroundColor:</span> "<span class="hljs-attr">red</span>",
+                <span class="hljs-attr">width:</span> <span class="hljs-attr">100</span>,
+                <span class="hljs-attr">height:</span> <span class="hljs-attr">100</span>,
+                <span class="hljs-attr">margin:</span> "<span class="hljs-attr">auto</span>",
+                <span class="hljs-attr">transition:</span> '<span class="hljs-attr">opacity</span> <span class="hljs-attr">1s</span> <span class="hljs-attr">ease-out</span>',
+                <span class="hljs-attr">opacity:</span> <span class="hljs-attr">state</span> === <span class="hljs-string">'exiting'</span> ? <span class="hljs-attr">0</span> <span class="hljs-attr">:</span> <span class="hljs-attr">1</span>
+              }}
+            /&gt;</span></span>
+          )}
+        &lt;<span class="hljs-regexp">/Transition&gt;
+</span></div></code></pre>
+<ul>
+<li><code>in</code>:  Show the component, triggers the enter or exit states.[boolean]</li>
+<li><code>mountOnEnter</code>, <code>unmountOnExit</code>: used to auto add/remove compoent from tree with changes in states.</li>
+<li><code>timeout</code>: timing of transition. can be single number or object like:<pre class="hljs"><code><div>  timeout={{
+     <span class="hljs-attr">appear</span>: <span class="hljs-number">500</span>,
+     <span class="hljs-attr">enter</span>: <span class="hljs-number">300</span>,
+     <span class="hljs-attr">exit</span>: <span class="hljs-number">500</span>,
+    }}
+</div></code></pre>
+</li>
+<li>also it has handler for different states: [<code>onEnter</code>,<code>onEntering</code>,<code>onEntered</code>,<code>onExit</code>,<code>onExiting</code>,<code>onExited</code>]</li>
+<li>it can hold content inside a method that have current state so we can custmize our transition, with <code> {state =&gt; ()}</code></li>
+</ul>
+<h3 id="use-csstransition">Use CSSTransition</h3>
+<p>we can use CSSTransition component, and with <code>classNames</code> add different class to be added.
+it can be configured by two ways</p>
+<ul>
+<li>add single name <code>classNames=&quot;fade&quot;</code> and it will search for all different class values like  <code>fade-enter</code>, <code>fade-enter-active</code>,
+<code>fade-exit</code>, <code>fade-exit-active</code>, <code>fade-appear</code>, and <code>fade-appear-active</code>.</li>
+<li>or add <strong>seperately</strong> like next sample.</li>
+</ul>
+<pre class="hljs"><code><div>&lt;CSSTransition 
+        mountOnEnter 
+        unmountOnExit 
+        <span class="hljs-keyword">in</span>={props.show} 
+        timeout={animationTiming}
+        classNames={{
+            <span class="hljs-attr">enter</span>: <span class="hljs-string">''</span>,
+            <span class="hljs-attr">enterActive</span>: <span class="hljs-string">'ModalOpen'</span>,
+            <span class="hljs-attr">exit</span>: <span class="hljs-string">''</span>,
+            <span class="hljs-attr">exitActive</span>: <span class="hljs-string">'ModalClosed'</span>
+        }}&gt;
+          <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"Modal"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>A Modal<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"Button"</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{props.closed}</span>&gt;</span>
+              Dismiss
+            <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+    &lt;<span class="hljs-regexp">/CSSTransition&gt;
+</span></div></code></pre>
+<h3 id="transitiongroup">TransitionGroup</h3>
+<p>if you want to transition a list we can use <code>TransitionGroup</code>.</p>
+<pre class="hljs"><code><div>&lt;TransitionGroup component=<span class="hljs-string">"ul"</span> className=<span class="hljs-string">"List"</span>&gt;
+          {listItems}
+        &lt;<span class="hljs-regexp">/TransitionGroup&gt;
+</span></div></code></pre>
+<p>then each item must be a <code>Transition</code> item</p>
+<pre class="hljs"><code><div>&lt;CSSTransition key={index} classNames=<span class="hljs-string">"fade"</span> timeout={<span class="hljs-number">300</span>}&gt;
+        <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span>
+          <span class="hljs-attr">className</span>=<span class="hljs-string">"ListItem"</span>
+          <span class="hljs-attr">onClick</span>=<span class="hljs-string">{()</span> =&gt;</span> this.removeItemHandler(index)}&gt;
+          {item}
+        <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span>
+      &lt;<span class="hljs-regexp">/CSSTransition&gt;
+</span></div></code></pre>
+<p>you may notice that <code>in</code> doesnot added here, as this is <strong>managed</strong> by <code>TransitionGroup</code>.
+as sample, you will add different classes of css like</p>
+<pre class="hljs"><code><div>.fade-enter {
+    <span class="hljs-attr">opacity</span>: <span class="hljs-number">0</span>;
+}
+</div></code></pre>
+<h3 id="other-libs">Other libs</h3>
+<p>there are many js library for animation like <code>react-motion</code></p>
+<hr>
+<h1 id="testing">Testing</h1>
+<p>we will test our component and logic by using 3 A's</p>
+<ul>
+<li><code>Arrange</code>: prepare code for testing like render components</li>
+<li><code>Act</code>: doing action like clicking buttons</li>
+<li><code>Assert</code>: verfigy and check some condition like element exist on screen</li>
+</ul>
+<p>we will need react testing library and jest which installed by default with <code>create-react-app</code>.</p>
+<h2 id="defining-suit-and-first-test">defining suit and first test</h2>
+<p>we create files that ends with <code>*.test.js</code>.</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> { render, screen } <span class="hljs-keyword">from</span> <span class="hljs-string">'@testing-library/react'</span>;
+<span class="hljs-keyword">import</span> Greeting <span class="hljs-keyword">from</span> <span class="hljs-string">'./Greeting'</span>;
+
+describe(<span class="hljs-string">'Greeting component'</span>, () =&gt; {
+  test(<span class="hljs-string">'renders Hello World as a text'</span>, () =&gt; {
+    <span class="hljs-comment">// Arrange</span>
+    render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Greeting</span> /&gt;</span></span>);
+
+    <span class="hljs-comment">// Act</span>
+    <span class="hljs-comment">// ... nothing</span>
+
+    <span class="hljs-comment">// Assert</span>
+    <span class="hljs-keyword">const</span> helloWorldElement = screen.getByText(<span class="hljs-string">'Hello World!'</span>);
+    expect(helloWorldElement).toBeInTheDocument();
+  });
+});
+
+</div></code></pre>
+<ul>
+<li><code>describe(name, func)</code>: used to define a suit,it needs a title, and a fuction that will have all tests</li>
+<li><code>test(name, func)</code>: write our test inside it</li>
+<li><code>getByText()</code> helper method to get element to be asserted.</li>
+<li>there are async ways to get element like <code>findByRole()</code> to test async code.</li>
+<li><code>expect()</code>: used to assert, also there is a bunch of assertion we can use.</li>
+</ul>
+<h2 id="adding-mocks">adding mocks</h2>
+<p>this is helpful to make our tests robust and not fails over time.
+<code>jest</code> will be used.
+a sample to mock <code>fetch method</code>:</p>
+<pre class="hljs"><code><div>  <span class="hljs-keyword">import</span> { render, screen } <span class="hljs-keyword">from</span> <span class="hljs-string">'@testing-library/react'</span>;
+  <span class="hljs-keyword">import</span> Async <span class="hljs-keyword">from</span> <span class="hljs-string">'./Async'</span>;
+
+  describe(<span class="hljs-string">'Async component'</span>, () =&gt; {
+    test(<span class="hljs-string">'renders posts if request succeeds'</span>, <span class="hljs-keyword">async</span> () =&gt; {
+      <span class="hljs-built_in">window</span>.fetch = jest.fn();
+      <span class="hljs-built_in">window</span>.fetch.mockResolvedValueOnce({
+        <span class="hljs-attr">json</span>: <span class="hljs-keyword">async</span> () =&gt; [{ <span class="hljs-attr">id</span>: <span class="hljs-string">'p1'</span>, <span class="hljs-attr">title</span>: <span class="hljs-string">'First post'</span> }],
+      });
+      render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Async</span> /&gt;</span></span>);
+
+      <span class="hljs-keyword">const</span> listItemElements = <span class="hljs-keyword">await</span> screen.findAllByRole(<span class="hljs-string">'listitem'</span>);
+      expect(listItemElements).not.toHaveLength(<span class="hljs-number">0</span>);
+    });
+  });
+
+</div></code></pre>
+<ul>
+<li><code>fn()</code> used to return a mocked version</li>
+<li><code>mockResolvedValueOnce()</code> to return the value.
+for more check <a href="https://jestjs.io/docs/mock-function-api#mockfnmockresolvedvalueoncevalue">jest</a> , <a href="https://www.w3.org/TR/html-aria/#docconformance">roles</a></li>
+</ul>
+<hr>
+<h1 id="react--typescript">React &amp; TypeScript</h1>
+<h2 id="basics">Basics</h2>
+<pre class="hljs"><code><div><span class="hljs-keyword">let</span> userName: string | string[];
+
+type Person = {
+  <span class="hljs-attr">name</span>: string;
+  age: number;
+};
+
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">insertAtBeginning</span>&lt;<span class="hljs-title">T</span>&gt;(<span class="hljs-params">array: T[], value: T</span>) </span>{
+  <span class="hljs-keyword">const</span> newArray = [value, ...array];
+  <span class="hljs-keyword">return</span> newArray;
+}
+
+</div></code></pre>
+<h2 id="react">React</h2>
+<p>it can be added from start with createReactApp by adding <code>--template typescript</code>
+it comes with some types and utilities</p>
+<ul>
+<li>files must end with tsx to allow jsx</li>
+<li>define types for <strong>props</strong>, <strong>refs</strong>, <strong>handlers</strong>, <strong>useState</strong></li>
+<li>if need to fill param of a method you can use <code>bind(null, id)</code> to bind first paramater of a method with id, <code>null</code> used to <code>this</code>.</li>
+</ul>
+<p>defining models for data (we can use <strong>interface</strong>):</p>
+<pre class="hljs"><code><div><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Todo</span> </span>{
+  <span class="hljs-attr">id</span>: string;
+  text: string;
+
+  <span class="hljs-keyword">constructor</span>(todoText: string) {
+    <span class="hljs-keyword">this</span>.text = todoText;
+    <span class="hljs-keyword">this</span>.id = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().toISOString();
+  }
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Todo;
+
+</div></code></pre>
+<p>for forms and refs:</p>
+<ul>
+<li>it should have intial value so we used null.</li>
+<li>we defined type of element will be referenced later</li>
+<li>for form we use <code>event: React.FormEvent</code> so <code>preventDefault</code> is known now.</li>
+<li><code>!</code> added to tell ts that we make sure we have value here, as it do not know at that place we are sure to have value we would use <code>?</code>  to be in safe.</li>
+</ul>
+<pre class="hljs"><code><div> <span class="hljs-keyword">const</span> todoTextInputRef = useRef&lt;HTMLInputElement&gt;(<span class="hljs-literal">null</span>);
+
+  <span class="hljs-keyword">const</span> submitHandler = <span class="hljs-function">(<span class="hljs-params">event: React.FormEvent</span>) =&gt;</span> {
+    event.preventDefault();
+
+    <span class="hljs-keyword">const</span> enteredText = todoTextInputRef.current!.value;
+
+    <span class="hljs-keyword">if</span> (enteredText.trim().length === <span class="hljs-number">0</span>) {
+      <span class="hljs-comment">// throw an error</span>
+      <span class="hljs-keyword">return</span>;
+    }
+
+    
+  };
+</div></code></pre>
+<p>for compoents:</p>
+<ul>
+<li>we use <code>React.FC</code> to tell it is functional compoent so we have <code>childern</code></li>
+<li>then we use generic to define other inputs.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">const</span> TodoItem: React.FC&lt;{ text: <span class="hljs-built_in">string</span> }&gt; = <span class="hljs-function">(<span class="hljs-params">props</span>) =&gt;</span> {
+  <span class="hljs-keyword">return</span> &lt;li&gt;{props.text}&lt;<span class="hljs-regexp">/li&gt;;
+};
+
+export default TodoItem;
+</span></div></code></pre>
+<p>with sates:</p>
+<ul>
+<li>we must use generic to define type of state as we did <code>useState&lt;Todo[]&gt;</code>.</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-keyword">const</span> [todos, setTodos] = useState&lt;Todo[]&gt;([]);
+</div></code></pre>
+<p>with context:</p>
+<ul>
+<li>add type of state will be managed.</li>
+<li><strong>useContext</strong> hook will auto get type.</li>
+</ul>
+<pre class="hljs"><code><div> React.createContext&lt;TodosContextObj&gt;
+</div></code></pre>
+<hr>
+
+</body>
+</html>
